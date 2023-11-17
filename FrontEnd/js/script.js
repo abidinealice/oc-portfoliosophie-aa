@@ -1,15 +1,22 @@
-const url = "http://localhost:5678/api/works"
-const container = document.getElementById("portfolio")
+const url = "http://localhost:5678/api/works" 
+const containerGallery = document.getElementById("gallery")
 
 
-const getData = () => {
+const getWorks = () => {
     fetch(url)
     .then(function (res) {
         return res.json()
     })
-    .then(function (data){
-        console.log(data)
+    .then(function (works){
+        console.log(works)
+        for (projects in works){
+            containerGallery.innerHTML += 
+            `<figure>
+				    <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
+				    <figcaption>${works[projects].title}</figcaption>
+			</figure>`
+        }
     })
 }
 
-getData()
+getWorks()
