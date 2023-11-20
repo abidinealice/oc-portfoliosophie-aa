@@ -1,35 +1,5 @@
 //PARTIE MES PROJETS
 
-//API CATEGORIES
-
-const urlCategories = "http://localhost:5678/api/categories"
-const containerCategories = document.getElementById("categories")
-
-const filterTous = new Set();
-const filterObjets = new Set();
-const filterAppartements = new Set();
-const filterHotelres = new Set();
-
-
-
-const getCategories = () => {
-    fetch(urlCategories)
-    .then(function (res) {
-        return res.json()
-    })
-    .then(function (categories){
-        console.log(categories)
-        containerCategories.innerHTML =
-            `<ul id="filters">
-                <li class="button_filter">Tous</li>
-            <ul>`
-        for (filter in categories){
-            document.getElementById("filters").innerHTML +=
-            `<li class="button_filter">${categories[filter].name}</li>`
-        }        
-    })
-}
-
 //API WORKS
 
 const urlWorks = "http://localhost:5678/api/works" 
@@ -54,7 +24,37 @@ const getWorks = () => {
     })
 }
 
+//API CATEGORIES
 
+const urlCategories = "http://localhost:5678/api/categories"
+const containerCategories = document.getElementById("categories")
+
+
+
+const getCategories = () => {
+    fetch(urlCategories)
+    .then(function (res) {
+        return res.json()
+    })
+    .then(function (categories){
+        console.log(categories)
+        containerCategories.innerHTML =
+            `<ul id="filters">
+                <li class="button_filter">Tous</li>
+            <ul>`
+        for (filter in categories){
+            document.getElementById("filters").innerHTML +=
+            `<li class="button_filter">${categories[filter].name}</li>`
+        }        
+    })
+}
+
+//FILTRES
+
+const filterTous = new Set();
+const filterObjets = new Set();
+const filterAppartements = new Set();
+const filterHotelres = new Set();
 
 //LANCEMENT
 
