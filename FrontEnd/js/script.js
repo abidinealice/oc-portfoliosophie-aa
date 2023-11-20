@@ -1,9 +1,12 @@
-const url = "http://localhost:5678/api/works" 
+const urlWorks = "http://localhost:5678/api/works" 
 const containerGallery = document.getElementById("gallery")
+
+const urlCategories = "http://localhost:5678/api/categories"
+const containerCategories = document.getElementById("categories")
 
 
 const getWorks = () => {
-    fetch(url)
+    fetch(urlWorks)
     .then(function (res) {
         return res.json()
     })
@@ -19,4 +22,25 @@ const getWorks = () => {
     })
 }
 
+const getCategories = () => {
+    fetch(urlCategories)
+    .then(function (res) {
+        return res.json()
+    })
+    .then(function (categories){
+        console.log(categories)
+        containerCategories.innerHTML =
+            `<ul id="filters">
+                <li class="button_filter">Tous</li>
+            <ul>`
+        for (filter in categories){
+            document.getElementById("filters").innerHTML +=
+            `<li class="button_filter">${categories[filter].name}</li>`
+        }        
+    })
+}
+
+
+
+getCategories()
 getWorks()

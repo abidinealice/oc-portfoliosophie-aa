@@ -186,3 +186,21 @@ footer nav ul {
 	margin: 2em
 }
 
+
+/*------------ FILTERS*/
+
+#categories{
+	margin: 50px auto;
+}
+
+#filters{
+	display: flex;
+	font-family: 'Syne';
+	color: #1D6154
+}
+.button_filter{
+	margin-left: 15px;
+	border: solid 1px #1D6154;
+	border-radius: 30px;
+	padding: 12px;
+}
