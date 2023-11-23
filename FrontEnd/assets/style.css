@@ -95,7 +95,7 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+nav li:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -190,6 +190,8 @@ footer nav ul {
 /*------------ FILTERS*/
 
 #categories{
+	display: flex;
+	justify-content: center;
 	margin: 50px auto;
 }
 
@@ -205,6 +207,7 @@ footer nav ul {
 	padding: 12px;
 }
 
-.button_filter:hover{
-	color: #1D6154;
+.button_filter:nth-child(1){
+	color: white;
+	background-color: #1D6154;
 }

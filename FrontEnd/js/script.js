@@ -41,7 +41,7 @@ const getCategories = () => {
         containerCategories.innerHTML =
             `<ul id="filters">
                 <li class="button_filter">Tous</li>
-            <ul>`
+            </ul>`
         for (filter in categories){
             document.getElementById("filters").innerHTML +=
             `<li class="button_filter">${categories[filter].name}</li>`
