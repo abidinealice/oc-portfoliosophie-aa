@@ -204,3 +204,7 @@ footer nav ul {
 	border-radius: 30px;
 	padding: 12px;
 }
+
+.button_filter:hover{
+	color: #1D6154;
+}
