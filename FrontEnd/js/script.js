@@ -51,7 +51,7 @@ const getCategories = () => {
 
 //FILTRES
 
-const filterTous = new Set();
+const filterTous = new Set([0,1,2,3,4,5,6,7,8,9,10]);
 const filterObjets = new Set();
 const filterAppartements = new Set();
 const filterHotelres = new Set();
