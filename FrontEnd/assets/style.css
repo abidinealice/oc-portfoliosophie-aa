@@ -145,19 +145,29 @@ nav ul a{
 
 #gallery img {
 	width: 100%;
-
 }
+
+#gallery figure figcaption{
+	margin-top: 10px;
+	font-family: 'Syne';
+	color: hsla(0, 0%, 24%, 1);
+	font-size: 12px;
+}
+
 #contact {
 	width: 50%;
+
 margin: auto;
 }
+
 #contact > * {
 	text-align: center;
-
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -174,6 +184,7 @@ margin: auto;
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -205,16 +216,13 @@ footer nav ul {
 	margin: 50px auto;
 }
 
-#filters{
-	display: flex;
-	font-family: 'Syne';
-	color: #1D6154
-}
+
 #btnTous, #btnObjets, #btnAppart, #btnHotelres{
 	margin-left: 15px;
 	border: solid 1px #1D6154;
 	border-radius: 30px;
 	padding: 12px;
+	color: #1D6154;
 	background-color: white;
 	font-family: 'Syne';
 }
@@ -222,4 +230,9 @@ footer nav ul {
 #btnTous{
 	color: white;
 	background-color: #1D6154;
+}
+
+.figcaption{
+	font-family: 'Syne';
+	color: red;
 }

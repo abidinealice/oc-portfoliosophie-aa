@@ -103,9 +103,13 @@ buttonTous.addEventListener('click', function onClick(event) {
   
     if (backgroundColor === 'white') {
         buttonTous.style.backgroundColor = '#1D6154';
+        buttonTous.style.color = 'white';
         buttonObjets.style.backgroundColor = 'white';
+        buttonObjets.style.color = '#1D6154';
         buttonAppartements.style.backgroundColor = 'white';
-        buttonHotelres.style.backgroundColor = 'white';    
+        buttonAppartements.style.color = '#1D6154';
+        buttonHotelres.style.backgroundColor = 'white';
+        buttonHotelres.style.color = '#1D6154';     
 
     }
 });
@@ -116,12 +120,16 @@ buttonObjets.addEventListener('click', function onClick(event) {
     if (backgroundColor === '#1D6154') {
         buttonObjets.style.backgroundColor = 'white';
 
+
     } else {
         buttonObjets.style.backgroundColor = '#1D6154';
+        buttonObjets.style.color = 'white';
         buttonTous.style.backgroundColor = 'white';
-        buttonTous.style.color = 'black';
+        buttonTous.style.color = '#1D6154';
         buttonAppartements.style.backgroundColor = 'white';
+        buttonAppartements.style.color = '#1D6154';
         buttonHotelres.style.backgroundColor = 'white';
+        buttonHotelres.style.color = '#1D6154';
 
     }
 });
@@ -131,13 +139,17 @@ buttonAppartements.addEventListener('click', function onClick(event) {
   
     if (backgroundColor === '#1D6154') {
         buttonAppartements.style.backgroundColor = 'white';
+  
 
     } else {
         buttonAppartements.style.backgroundColor = '#1D6154';
+        buttonAppartements.style.color = 'white';
         buttonTous.style.backgroundColor = 'white';
-        buttonTous.style.color = 'black';
+        buttonTous.style.color = '#1D6154';
         buttonObjets.style.backgroundColor = 'white';
+        buttonObjets.style.color = '#1D6154';
         buttonHotelres.style.backgroundColor = 'white';
+        buttonHotelres.style.color = '#1D6154';
 
     }
 });
@@ -148,12 +160,16 @@ buttonHotelres.addEventListener('click', function onClick(event) {
     if (backgroundColor === '#1D6154') {
         buttonHotelres.style.backgroundColor = 'white';
 
+
     } else {
         buttonHotelres.style.backgroundColor = '#1D6154';
+        buttonHotelres.style.color = 'white';
         buttonTous.style.backgroundColor = 'white';
-        buttonTous.style.color = 'black';
+        buttonTous.style.color = '#1D6154';
         buttonObjets.style.backgroundColor = 'white';
+        buttonObjets.style.color = '#1D6154';
         buttonAppartements.style.backgroundColor = 'white';
+        buttonAppartements.style.color = '#1D6154';
 
     }
 });
