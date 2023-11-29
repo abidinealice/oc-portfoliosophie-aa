@@ -24,39 +24,77 @@ const getWorks = () => {
     })
 }
 
-//API CATEGORIES
 
-const urlCategories = "http://localhost:5678/api/categories"
-const containerCategories = document.getElementById("categories")
-
-
-
-const getCategories = () => {
-    fetch(urlCategories)
+const getWorksObjets = () => {
+    fetch(urlWorks)
     .then(function (res) {
         return res.json()
     })
-    .then(function (categories){
-        console.log(categories)
-        containerCategories.innerHTML =
-            `<ul id="filters">
-                <li class="button_filter">Tous</li>
-            </ul>`
-        for (filter in categories){
-            document.getElementById("filters").innerHTML +=
-            `<li class="button_filter">${categories[filter].name}</li>`
-        }        
+    .then(function (works){
+        console.log(works)
+        for (projects of filterObjets){
+            console.log(projects)
+            containerGallery.innerHTML += 
+                `<figure>
+				    <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
+				    <figcaption>${works[projects].title}</figcaption>
+			    </figure>`
+            }           
     })
 }
+
+const getWorksAppartements = () => {
+    fetch(urlWorks)
+    .then(function (res) {
+        return res.json()
+    })
+    .then(function (works){
+        console.log(works)
+        for (projects of filterAppartements){
+            console.log(projects)
+            containerGallery.innerHTML += 
+                `<figure>
+				    <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
+				    <figcaption>${works[projects].title}</figcaption>
+			    </figure>`
+            }           
+    })
+}
+
+const getWorksHotelres = () => {
+    fetch(urlWorks)
+    .then(function (res) {
+        return res.json()
+    })
+    .then(function (works){
+        console.log(works)
+        for (projects of filterHotelres){
+            console.log(projects)
+            containerGallery.innerHTML += 
+                `<figure>
+				    <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
+				    <figcaption>${works[projects].title}</figcaption>
+			    </figure>`
+            }           
+    })
+}
+
+
+
 
 //FILTRES
 
 const filterTous = new Set([0,1,2,3,4,5,6,7,8,9,10]);
-const filterObjets = new Set();
-const filterAppartements = new Set();
-const filterHotelres = new Set();
+const filterObjets = new Set([0,4]);
+const filterAppartements = new Set([1,3,5,6,7,8]);
+const filterHotelres = new Set([2,9,10]);
+
+
 
 //LANCEMENT
 
-getCategories()
 getWorks()
+//getWorksObjets()
+//getWorksAppartements()
+//getWorksHotelres()
+

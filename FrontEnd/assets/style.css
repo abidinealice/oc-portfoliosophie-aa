@@ -210,14 +210,16 @@ footer nav ul {
 	font-family: 'Syne';
 	color: #1D6154
 }
-.button_filter{
+#btnTous, #btnObjets, #btnAppart, #btnHotelres{
 	margin-left: 15px;
 	border: solid 1px #1D6154;
 	border-radius: 30px;
 	padding: 12px;
+	background-color: white;
+	font-family: 'Syne';
 }
 
-.button_filter:nth-child(1){
+#btnTous{
 	color: white;
 	background-color: #1D6154;
 }
