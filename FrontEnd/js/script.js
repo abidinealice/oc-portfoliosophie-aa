@@ -109,7 +109,7 @@ buttonTous.addEventListener('click', function onClick(event) {
         buttonAppartements.style.backgroundColor = 'white';
         buttonAppartements.style.color = '#1D6154';
         buttonHotelres.style.backgroundColor = 'white';
-        buttonHotelres.style.color = '#1D6154';     
+        buttonHotelres.style.color = '#1D6154';   
 
     }
 });
@@ -173,7 +173,6 @@ buttonHotelres.addEventListener('click', function onClick(event) {
 
     }
 });
-
 
 
 //LANCEMENT
