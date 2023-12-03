@@ -25,6 +25,8 @@ async function getWorks() {
   //console.log(works);
 }
 
+//LANCEMENT
+
 getWorks();
 
 // LOCAL STORAGE
@@ -205,8 +207,3 @@ buttonHotelres.addEventListener("click", function onClick(event) {
     buttonAppartements.style.color = "#1D6154";
   }
 });
-
-//LANCEMENT
-
-//getWorks();
-//displayWorks();
