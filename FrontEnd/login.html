@@ -28,11 +28,14 @@
     <main>
       <section id="login">
         <h2>Log In</h2>
+        <div class="msg-error" hidden>
+          <p>Erreur dans l’identifiant ou le mot de passe</p>
+        </div>
         <form class="form-login">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" required />
+          <input type="email" name="email" id="email" />
           <label for="pass">Mot de passe</label>
-          <input type="password" id="pass" name="password" required />
+          <input type="password" id="pass" name="password" />
           <input type="submit" value="Se connecter" />
         </form>
         <p>Mot de passe oublié</p>

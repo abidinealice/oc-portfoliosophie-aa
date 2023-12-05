@@ -241,6 +241,11 @@ input[type="submit"] {
   text-decoration: underline;
 }
 
+#login .msg-error p {
+  text-decoration: none;
+  color: red;
+}
+
 /*------------ FOOTER*/
 
 footer nav ul {
