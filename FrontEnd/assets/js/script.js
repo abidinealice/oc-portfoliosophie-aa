@@ -37,7 +37,7 @@ let work = window.localStorage.getItem("works");
 //console.log(work);
 //console.log(typeof work);
 let workProjects = JSON.parse(work);
-console.log(workProjects);
+//console.log(workProjects);
 //console.log(typeof workProjects);
 
 // BOUTON FILTRES + COULEURS
@@ -214,7 +214,7 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //window.sessionStorage.setItem("valueToken", utilToken);
 let token = window.sessionStorage.getItem("valueToken");
 let valueToken = JSON.parse(token);
-console.log(valueToken);
+//console.log(valueToken);
 
 const logout = document.querySelector(".lien-logout");
 const login = document.querySelector(".lien-login");
@@ -255,6 +255,7 @@ if (valueToken !== null && logout.hasAttribute("hidden")) {
 //HIDE MODAL
 
 const modalBtnHide = document.querySelector(".btn-modal-hide");
+console.log(modalBtnHide.id);
 
 modalBtnHide.addEventListener("click", function onClick(event) {
   modal.style.visibility = "hidden";
@@ -265,8 +266,12 @@ modalBtnHide.addEventListener("click", function onClick(event) {
 const modalContainerGallery = document.querySelector(".modal-gallery");
 
 for (projects in workProjects) {
-  modalContainerGallery.innerHTML += `<figure>
-  <img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
-  <i class="fa-solid fa-trash-can"></i>
+  modalContainerGallery.innerHTML += `<figure data-id="${[projects]}">
+  <img src="${workProjects[projects].imageUrl}" alt="${
+    workProjects[projects].title
+  }">
+  <i class="fa-solid fa-trash-can" id="${[projects]}"></i>
 </figure>`;
 }
+
+//GALLERY MODAL --- SUPPRIMER PROJET
