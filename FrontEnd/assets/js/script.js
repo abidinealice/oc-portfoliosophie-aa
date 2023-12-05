@@ -1,6 +1,6 @@
-//PARTIE MES PROJETS
-
-//API WORKS
+//-------------------------------------------------------//
+//-------- PARTIE MES PROJETS
+//-------------------------------------------------------//
 
 const urlWorks = "http://localhost:5678/api/works";
 const containerGallery = document.querySelector(".gallery");
@@ -207,3 +207,12 @@ buttonHotelres.addEventListener("click", function onClick(event) {
     buttonAppartements.style.color = "#1D6154";
   }
 });
+
+//-------------------------------------------------------//
+//-------- PARTIE L'UTILISATEUR EST CONNECTE
+//-------------------------------------------------------//
+
+//window.localStorage.setItem("valueToken", utilToken);
+let token = window.localStorage.getItem("valueToken");
+let valueToken = JSON.parse(token);
+console.log(valueToken);
