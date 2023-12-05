@@ -11,6 +11,10 @@
       rel="stylesheet"
     />
     <meta name="description" content="" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
@@ -63,7 +67,7 @@
                 src="./assets/icons/pentosquareblack.svg"
                 alt="Icon pentosquare"
               />
-              <a href="#modal1"><p>modifier</p></a>
+              <a href="#modal1"><p class="btn-modal-show">modifier</p></a>
             </div>
           </div>
           <aside
@@ -75,8 +79,19 @@
             aria-labelledby="title-modal"
           >
             <div class="modal-wrapper">
+              <img
+                src="assets/icons/xmark-solid.svg"
+                alt="Icon xmark"
+                class="btn-modal-hide"
+              />
               <p id="title-modal">Gallerie photo</p>
-              <button>Ajouter une photo</button>
+              <div class="modal-container-gallery">
+                <div class="modal-gallery"></div>
+              </div>
+              <span></span>
+              <div class="btn-modal-ajout">
+                <button>Ajouter une photo</button>
+              </div>
             </div>
           </aside>
           <div id="categories">
@@ -116,6 +131,10 @@
       </footer>
     </div>
 
+    <script
+      src="https://kit.fontawesome.com/1b490d226f.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="assets/js/script.js"></script>
   </body>
 </html>

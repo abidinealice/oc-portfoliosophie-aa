@@ -18,6 +18,8 @@ async function getWorks() {
 </figure>`;
   }
 
+  //On crée le localStorage
+
   const valuesWorks = JSON.stringify(works);
   //console.log(typeof valuesWorks);
 
@@ -55,12 +57,8 @@ buttonTous.addEventListener("click", function onClick(event) {
 
   //ON FILTRE LES PROJETS
 
-  let filteredTous = workProjects.filter((objects) => {
-    return (
-      objects.categoryId == 1 ||
-      objects.categoryId == 2 ||
-      objects.categoryId == 3
-    );
+  const filteredTous = workProjects.filter((tous) => {
+    return tous.categoryId == 1 || tous.categoryId == 2 || tous.categoryId == 3;
   });
 
   console.log(filteredTous);
@@ -229,10 +227,12 @@ logout.addEventListener("click", function onClick(event) {
 
 const editingMode = document.querySelector(".editing-mode");
 const editing = document.querySelector(".editing");
+const modal = document.querySelector("#modal1");
 
 if (valueToken == null) {
   editingMode.remove();
   editing.remove();
+  modal.style.visibility = "hidden";
 }
 
 //HIDE LOGIN SHOW LOGOUT
@@ -240,5 +240,33 @@ if (valueToken == null) {
 if (valueToken !== null && logout.hasAttribute("hidden")) {
   logout.removeAttribute("hidden");
   login.setAttribute("hidden", "");
-  console.log(login);
+  //console.log(login);
+  modal.style.visibility = "hidden";
+
+  //SHOW MODAL
+  const btnModalShow = document.querySelector(".btn-modal-show");
+
+  btnModalShow.addEventListener("click", function onClick(event) {
+    modal.style.visibility = "visible";
+    //console.log(modal);
+  });
+}
+
+//HIDE MODAL
+
+const modalBtnHide = document.querySelector(".btn-modal-hide");
+
+modalBtnHide.addEventListener("click", function onClick(event) {
+  modal.style.visibility = "hidden";
+});
+
+//GALLERY MODAL --- AFFICHAGE
+
+const modalContainerGallery = document.querySelector(".modal-gallery");
+
+for (projects in workProjects) {
+  modalContainerGallery.innerHTML += `<figure>
+  <img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
+  <i class="fa-solid fa-trash-can"></i>
+</figure>`;
 }
