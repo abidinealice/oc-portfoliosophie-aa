@@ -212,13 +212,33 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //-------- PARTIE L'UTILISATEUR EST CONNECTE
 //-------------------------------------------------------//
 
+//LOG OUT
 //window.sessionStorage.setItem("valueToken", utilToken);
 let token = window.sessionStorage.getItem("valueToken");
 let valueToken = JSON.parse(token);
 console.log(valueToken);
 
 const logout = document.querySelector(".lien-logout");
+const login = document.querySelector(".lien-login");
 
 logout.addEventListener("click", function onClick(event) {
   sessionStorage.removeItem("valueToken");
 });
+
+//HIDE OR SHOW MODE EDITION
+
+const editingMode = document.querySelector(".editing-mode");
+const editing = document.querySelector(".editing");
+
+if (valueToken == null) {
+  editingMode.remove();
+  editing.remove();
+}
+
+//HIDE LOGIN SHOW LOGOUT
+
+if (valueToken !== null && logout.hasAttribute("hidden")) {
+  logout.removeAttribute("hidden");
+  login.setAttribute("hidden", "");
+  console.log(login);
+}

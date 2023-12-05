@@ -25,7 +25,7 @@
           <ul>
             <a href="#navProjets"><li>projets</li></a>
             <a href="#contact"><li>contact</li></a>
-            <a href="login.html"><li>login</li></a>
+            <a href="login.html" class="lien-login"><li>login</li></a>
             <a href="login.html" class="lien-logout" hidden><li>logout</li></a>
             <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
           </ul>
@@ -63,9 +63,22 @@
                 src="./assets/icons/pentosquareblack.svg"
                 alt="Icon pentosquare"
               />
-              <p>modifier</p>
+              <a href="#modal1"><p>modifier</p></a>
             </div>
           </div>
+          <aside
+            id="modal1"
+            class="modal"
+            aria-hidden="false"
+            role="dialog"
+            aria-modal="false"
+            aria-labelledby="title-modal"
+          >
+            <div class="modal-wrapper">
+              <p id="title-modal">Gallerie photo</p>
+              <button>Ajouter une photo</button>
+            </div>
+          </aside>
           <div id="categories">
             <button id="btnTous">Tous</button>
             <button id="btnObjets">Objets</button>
