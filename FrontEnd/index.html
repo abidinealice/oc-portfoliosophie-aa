@@ -15,7 +15,7 @@
   </head>
   <body>
     <div class="editing-mode">
-      <i class="fa-regular fa-pen-to-square"></i>
+      <img src="./assets/icons/pentosquare.svg" alt="Icon pentosquare" />
       <p>Mode édition</p>
     </div>
     <div class="main-container">
@@ -26,6 +26,7 @@
             <a href="#navProjets"><li>projets</li></a>
             <a href="#contact"><li>contact</li></a>
             <a href="login.html"><li>login</li></a>
+            <a href="login.html" class="lien-logout" hidden><li>logout</li></a>
             <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
           </ul>
         </nav>
@@ -55,7 +56,16 @@
           </article>
         </section>
         <section id="portfolio">
-          <h2 id="navProjets">Mes Projets</h2>
+          <div class="section-project">
+            <h2>Mes Projets</h2>
+            <div class="editing">
+              <img
+                src="./assets/icons/pentosquareblack.svg"
+                alt="Icon pentosquare"
+              />
+              <p>modifier</p>
+            </div>
+          </div>
           <div id="categories">
             <button id="btnTous">Tous</button>
             <button id="btnObjets">Objets</button>

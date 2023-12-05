@@ -212,7 +212,13 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //-------- PARTIE L'UTILISATEUR EST CONNECTE
 //-------------------------------------------------------//
 
-//window.localStorage.setItem("valueToken", utilToken);
-let token = window.localStorage.getItem("valueToken");
+//window.sessionStorage.setItem("valueToken", utilToken);
+let token = window.sessionStorage.getItem("valueToken");
 let valueToken = JSON.parse(token);
 console.log(valueToken);
+
+const logout = document.querySelector(".lien-logout");
+
+logout.addEventListener("click", function onClick(event) {
+  sessionStorage.removeItem("valueToken");
+});

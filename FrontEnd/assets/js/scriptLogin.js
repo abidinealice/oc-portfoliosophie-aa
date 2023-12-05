@@ -39,7 +39,7 @@ formLogin.addEventListener("submit", function (event) {
 
     if (response.ok) {
       const utilToken = JSON.stringify(valueToken);
-      window.localStorage.setItem("valueToken", utilToken);
+      window.sessionStorage.setItem("valueToken", utilToken);
       //console.log(utilToken);
       //console.log(typeof utilToken);
 
