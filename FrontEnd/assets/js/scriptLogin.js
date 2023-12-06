@@ -28,7 +28,6 @@ formLogin.addEventListener("submit", function (event) {
     const response = await fetch(urlLogin, {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: chargeUtile,
@@ -51,6 +50,7 @@ formLogin.addEventListener("submit", function (event) {
 
       window.location.href = "./index.html";
     } else {
+      //on affiche le message d'erreur si l'utilisateur s'est trompé dans l'email ou mdp
       if (msgError.hasAttributes("hidden")) {
         msgError.removeAttribute("hidden");
       }

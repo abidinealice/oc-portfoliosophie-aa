@@ -4,10 +4,14 @@
 
 const urlWorks = "http://localhost:5678/api/works";
 const containerGallery = document.querySelector(".gallery");
+let workProjects = [];
+
+//AFFICHAGE DES PROJETS
 
 async function getWorks() {
   const response = await fetch(urlWorks);
   const works = await response.json();
+  workProjects = works;
   //console.log(works);
   //console.log(typeof works);
 
@@ -18,12 +22,25 @@ async function getWorks() {
 </figure>`;
   }
 
+  //GALLERY MODAL --- AFFICHAGE
+
+  const modalContainerGallery = document.querySelector(".modal-gallery");
+
+  for (projects in workProjects) {
+    modalContainerGallery.innerHTML += `<figure data-id="${[projects]}">
+  <img src="${workProjects[projects].imageUrl}" alt="${
+      workProjects[projects].title
+    }">
+  <i class="fa-solid fa-trash-can" id="${[projects]}"></i>
+</figure>`;
+  }
+
   //On crée le localStorage
 
-  const valuesWorks = JSON.stringify(works);
+  //const valuesWorks = JSON.stringify(works);
   //console.log(typeof valuesWorks);
 
-  window.localStorage.setItem("works", valuesWorks);
+  //window.localStorage.setItem("works", valuesWorks);
   //console.log(works);
 }
 
@@ -33,10 +50,10 @@ getWorks();
 
 // LOCAL STORAGE
 
-let work = window.localStorage.getItem("works");
+//let work = window.localStorage.getItem("works");
 //console.log(work);
 //console.log(typeof work);
-let workProjects = JSON.parse(work);
+
 //console.log(workProjects);
 //console.log(typeof workProjects);
 
@@ -50,6 +67,25 @@ const buttonHotelres = document.getElementById("btnHotelres");
 buttonTous.style.backgroundColor = "#1D6154";
 buttonTous.style.color = "white";
 
+function changeColorBtnOn(btn) {
+  btn.style.backgroundColor = "#1D6154";
+  btn.style.color = "white";
+}
+
+function changeColorBtnOff(btn) {
+  btn.style.backgroundColor = "white";
+  btn.style.color = "#1D6154";
+}
+
+function changeColor(btn1, btn2, btn3, btn4) {
+  changeColorBtnOn(btn1);
+  changeColorBtnOff(btn2);
+  changeColorBtnOff(btn3);
+  changeColorBtnOff(btn4);
+}
+
+//AFFICHAGE DE TOUS LES PROJETS
+
 buttonTous.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
 
@@ -57,18 +93,25 @@ buttonTous.addEventListener("click", function onClick(event) {
 
   //ON FILTRE LES PROJETS
 
-  const filteredTous = workProjects.filter((tous) => {
-    return tous.categoryId == 1 || tous.categoryId == 2 || tous.categoryId == 3;
-  });
+  //const filteredTous = workProjects.filter((tous) => {
+  //return tous.categoryId == 1 || tous.categoryId == 2 || tous.categoryId == 3;
+  //});
 
-  console.log(filteredTous);
+  //console.log(filteredTous);
 
   //ON AFFICHE LES PROJETS FILTRES
 
-  for (projects in filteredTous) {
+  //for (projects in filteredTous) {
+  //containerGallery.innerHTML += `<figure>
+  //<img src="${filteredTous[projects].imageUrl}" alt="${filteredTous[projects].title}">
+  //<figcaption>${filteredTous[projects].title}</figcaption>
+  //</figure>`;
+  //}
+
+  for (projects in workProjects) {
     containerGallery.innerHTML += `<figure>
-    <img src="${filteredTous[projects].imageUrl}" alt="${filteredTous[projects].title}">
-    <figcaption>${filteredTous[projects].title}</figcaption>
+    <img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
+    <figcaption>${workProjects[projects].title}</figcaption>
   </figure>`;
   }
 
@@ -77,16 +120,23 @@ buttonTous.addEventListener("click", function onClick(event) {
   let backgroundColor = buttonTous.style.backgroundColor;
 
   if (backgroundColor === "white") {
-    buttonTous.style.backgroundColor = "#1D6154";
-    buttonTous.style.color = "white";
-    buttonObjets.style.backgroundColor = "white";
-    buttonObjets.style.color = "#1D6154";
-    buttonAppartements.style.backgroundColor = "white";
-    buttonAppartements.style.color = "#1D6154";
-    buttonHotelres.style.backgroundColor = "white";
-    buttonHotelres.style.color = "#1D6154";
+    //buttonTous.style.backgroundColor = "#1D6154";
+    //buttonTous.style.color = "white";
+    //buttonObjets.style.backgroundColor = "white";
+    //buttonObjets.style.color = "#1D6154";
+    //buttonAppartements.style.backgroundColor = "white";
+    //buttonAppartements.style.color = "#1D6154";
+    //buttonHotelres.style.backgroundColor = "white";
+    //buttonHotelres.style.color = "#1D6154";
+    //changeColorBtnOn(buttonTous);
+    //changeColorBtnOff(buttonObjets);
+    //changeColorBtnOff(buttonAppartements);
+    //changeColorBtnOff(buttonHotelres);
+    changeColor(buttonTous, buttonObjets, buttonAppartements, buttonHotelres);
   }
 });
+
+//AFFICHAGE DES PROJETS OBJETS
 
 buttonObjets.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
@@ -117,16 +167,19 @@ buttonObjets.addEventListener("click", function onClick(event) {
   if (backgroundColor === "#1D6154") {
     buttonObjets.style.backgroundColor = "white";
   } else {
-    buttonObjets.style.backgroundColor = "#1D6154";
-    buttonObjets.style.color = "white";
-    buttonTous.style.backgroundColor = "white";
-    buttonTous.style.color = "#1D6154";
-    buttonAppartements.style.backgroundColor = "white";
-    buttonAppartements.style.color = "#1D6154";
-    buttonHotelres.style.backgroundColor = "white";
-    buttonHotelres.style.color = "#1D6154";
+    //buttonObjets.style.backgroundColor = "#1D6154";
+    //buttonObjets.style.color = "white";
+    //buttonTous.style.backgroundColor = "white";
+    //buttonTous.style.color = "#1D6154";
+    //buttonAppartements.style.backgroundColor = "white";
+    //buttonAppartements.style.color = "#1D6154";
+    //buttonHotelres.style.backgroundColor = "white";
+    //buttonHotelres.style.color = "#1D6154";
+    changeColor(buttonObjets, buttonTous, buttonAppartements, buttonHotelres);
   }
 });
+
+//AFFICHAGE DES PROJETS APPARTEMENTS
 
 buttonAppartements.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
@@ -156,16 +209,19 @@ buttonAppartements.addEventListener("click", function onClick(event) {
   if (backgroundColor === "#1D6154") {
     buttonAppartements.style.backgroundColor = "white";
   } else {
-    buttonAppartements.style.backgroundColor = "#1D6154";
-    buttonAppartements.style.color = "white";
-    buttonTous.style.backgroundColor = "white";
-    buttonTous.style.color = "#1D6154";
-    buttonObjets.style.backgroundColor = "white";
-    buttonObjets.style.color = "#1D6154";
-    buttonHotelres.style.backgroundColor = "white";
-    buttonHotelres.style.color = "#1D6154";
+    //buttonAppartements.style.backgroundColor = "#1D6154";
+    //buttonAppartements.style.color = "white";
+    //buttonTous.style.backgroundColor = "white";
+    //buttonTous.style.color = "#1D6154";
+    //buttonObjets.style.backgroundColor = "white";
+    //buttonObjets.style.color = "#1D6154";
+    //buttonHotelres.style.backgroundColor = "white";
+    //buttonHotelres.style.color = "#1D6154";
+    changeColor(buttonAppartements, buttonTous, buttonObjets, buttonHotelres);
   }
 });
+
+//AFFICHAGE DES PROJETS HOTELRES
 
 buttonHotelres.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
@@ -195,14 +251,15 @@ buttonHotelres.addEventListener("click", function onClick(event) {
   if (backgroundColor === "#1D6154") {
     buttonHotelres.style.backgroundColor = "white";
   } else {
-    buttonHotelres.style.backgroundColor = "#1D6154";
-    buttonHotelres.style.color = "white";
-    buttonTous.style.backgroundColor = "white";
-    buttonTous.style.color = "#1D6154";
-    buttonObjets.style.backgroundColor = "white";
-    buttonObjets.style.color = "#1D6154";
-    buttonAppartements.style.backgroundColor = "white";
-    buttonAppartements.style.color = "#1D6154";
+    //buttonHotelres.style.backgroundColor = "#1D6154";
+    //buttonHotelres.style.color = "white";
+    //buttonTous.style.backgroundColor = "white";
+    //buttonTous.style.color = "#1D6154";
+    //buttonObjets.style.backgroundColor = "white";
+    //buttonObjets.style.color = "#1D6154";
+    //buttonAppartements.style.backgroundColor = "white";
+    //buttonAppartements.style.color = "#1D6154";
+    changeColor(buttonHotelres, buttonTous, buttonObjets, buttonAppartements);
   }
 });
 
@@ -214,10 +271,12 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //window.sessionStorage.setItem("valueToken", utilToken);
 let token = window.sessionStorage.getItem("valueToken");
 let valueToken = JSON.parse(token);
-//console.log(valueToken);
+console.log(valueToken);
 
 const logout = document.querySelector(".lien-logout");
 const login = document.querySelector(".lien-login");
+
+//On vide le session storage, token supprimé
 
 logout.addEventListener("click", function onClick(event) {
   sessionStorage.removeItem("valueToken");
@@ -229,6 +288,9 @@ const editingMode = document.querySelector(".editing-mode");
 const editing = document.querySelector(".editing");
 const modal = document.querySelector("#modal1");
 
+//Si l'utilisateur n'est pas connecté:
+// - on cache le mode édition
+
 if (valueToken == null) {
   editingMode.remove();
   editing.remove();
@@ -236,6 +298,10 @@ if (valueToken == null) {
 }
 
 //HIDE LOGIN SHOW LOGOUT
+//Si l'utilisateur est connecté :
+// - on affiche le mode édition
+// - on cache le login
+// - on active le logout
 
 if (valueToken !== null && logout.hasAttribute("hidden")) {
   logout.removeAttribute("hidden");
@@ -244,6 +310,7 @@ if (valueToken !== null && logout.hasAttribute("hidden")) {
   modal.style.visibility = "hidden";
 
   //SHOW MODAL
+  //lorsqu'on clique sur "modifier", le modal s'active/s'ouvre
   const btnModalShow = document.querySelector(".btn-modal-show");
 
   btnModalShow.addEventListener("click", function onClick(event) {
@@ -260,18 +327,5 @@ console.log(modalBtnHide.id);
 modalBtnHide.addEventListener("click", function onClick(event) {
   modal.style.visibility = "hidden";
 });
-
-//GALLERY MODAL --- AFFICHAGE
-
-const modalContainerGallery = document.querySelector(".modal-gallery");
-
-for (projects in workProjects) {
-  modalContainerGallery.innerHTML += `<figure data-id="${[projects]}">
-  <img src="${workProjects[projects].imageUrl}" alt="${
-    workProjects[projects].title
-  }">
-  <i class="fa-solid fa-trash-can" id="${[projects]}"></i>
-</figure>`;
-}
 
 //GALLERY MODAL --- SUPPRIMER PROJET
