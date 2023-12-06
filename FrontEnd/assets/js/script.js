@@ -5,6 +5,9 @@
 const urlWorks = "http://localhost:5678/api/works";
 const containerGallery = document.querySelector(".gallery");
 let workProjects = [];
+const urlCategories = "http://localhost:5678/api/categories";
+let categoriesProjects = [];
+const containerCategories = document.querySelector("#categories");
 
 //AFFICHAGE DES PROJETS
 
@@ -44,9 +47,33 @@ async function getWorks() {
   //console.log(works);
 }
 
+//AFFICHAGE DES PROJETS
+
+async function getCategories() {
+  const response = await fetch(urlCategories);
+  const categories = await response.json();
+  categoriesProjects = categories;
+  console.log(categoriesProjects);
+  //console.log(typeof categoriesProjects);
+  //console.log(Object.values(categoriesProjects));
+
+  let htmlBtnTous = document.createElement("button");
+  htmlBtnTous.textContent = "Tous";
+  htmlBtnTous.setAttribute("id", "btnTous");
+  containerCategories.appendChild(htmlBtnTous);
+
+  //for (i in categories) {
+  //let htmlBtn = document.createElement("button");
+  //htmlBtn.textContent = "categories[i].name";
+  //htmlBtn.setAttribute("id", "categories[i].name");
+  //containerCategories.appendChild(htmlBtn);
+  //}
+}
+
 //LANCEMENT
 
 getWorks();
+getCategories();
 
 // LOCAL STORAGE
 
@@ -64,8 +91,8 @@ const buttonObjets = document.getElementById("btnObjets");
 const buttonAppartements = document.getElementById("btnAppart");
 const buttonHotelres = document.getElementById("btnHotelres");
 
-buttonTous.style.backgroundColor = "#1D6154";
-buttonTous.style.color = "white";
+//-------buttonTous.style.backgroundColor = "#1D6154";
+//-------buttonTous.style.color = "white";
 
 function changeColorBtnOn(btn) {
   btn.style.backgroundColor = "#1D6154";
@@ -86,182 +113,182 @@ function changeColor(btn1, btn2, btn3, btn4) {
 
 //AFFICHAGE DE TOUS LES PROJETS
 
-buttonTous.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
+//-------buttonTous.addEventListener("click", function onClick(event) {
+//ON VIDE LA GALLERIE
 
-  containerGallery.innerHTML = "";
+//-------containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+//ON FILTRE LES PROJETS
 
-  //const filteredTous = workProjects.filter((tous) => {
-  //return tous.categoryId == 1 || tous.categoryId == 2 || tous.categoryId == 3;
-  //});
+//const filteredTous = workProjects.filter((tous) => {
+//return tous.categoryId == 1 || tous.categoryId == 2 || tous.categoryId == 3;
+//});
 
-  //console.log(filteredTous);
+//console.log(filteredTous);
 
-  //ON AFFICHE LES PROJETS FILTRES
+//ON AFFICHE LES PROJETS FILTRES
 
-  //for (projects in filteredTous) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredTous[projects].imageUrl}" alt="${filteredTous[projects].title}">
-  //<figcaption>${filteredTous[projects].title}</figcaption>
-  //</figure>`;
-  //}
+//for (projects in filteredTous) {
+//containerGallery.innerHTML += `<figure>
+//<img src="${filteredTous[projects].imageUrl}" alt="${filteredTous[projects].title}">
+//<figcaption>${filteredTous[projects].title}</figcaption>
+//</figure>`;
+//}
 
-  for (projects in workProjects) {
-    containerGallery.innerHTML += `<figure>
-    <img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
-    <figcaption>${workProjects[projects].title}</figcaption>
-  </figure>`;
-  }
+//-------for (projects in workProjects) {
+//-------containerGallery.innerHTML += `<figure>
+//-------<img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
+//-------<figcaption>${workProjects[projects].title}</figcaption>
+//-------</figure>`;
+//-------}
 
-  //ON CHANGE LA COULEUR DU BOUTON
+//ON CHANGE LA COULEUR DU BOUTON
 
-  let backgroundColor = buttonTous.style.backgroundColor;
+//-------let backgroundColor = buttonTous.style.backgroundColor;
 
-  if (backgroundColor === "white") {
-    //buttonTous.style.backgroundColor = "#1D6154";
-    //buttonTous.style.color = "white";
-    //buttonObjets.style.backgroundColor = "white";
-    //buttonObjets.style.color = "#1D6154";
-    //buttonAppartements.style.backgroundColor = "white";
-    //buttonAppartements.style.color = "#1D6154";
-    //buttonHotelres.style.backgroundColor = "white";
-    //buttonHotelres.style.color = "#1D6154";
-    //changeColorBtnOn(buttonTous);
-    //changeColorBtnOff(buttonObjets);
-    //changeColorBtnOff(buttonAppartements);
-    //changeColorBtnOff(buttonHotelres);
-    changeColor(buttonTous, buttonObjets, buttonAppartements, buttonHotelres);
-  }
-});
+//-------if (backgroundColor === "white") {
+//buttonTous.style.backgroundColor = "#1D6154";
+//buttonTous.style.color = "white";
+//buttonObjets.style.backgroundColor = "white";
+//buttonObjets.style.color = "#1D6154";
+//buttonAppartements.style.backgroundColor = "white";
+//buttonAppartements.style.color = "#1D6154";
+//buttonHotelres.style.backgroundColor = "white";
+//buttonHotelres.style.color = "#1D6154";
+//changeColorBtnOn(buttonTous);
+//changeColorBtnOff(buttonObjets);
+//changeColorBtnOff(buttonAppartements);
+//changeColorBtnOff(buttonHotelres);
+//-------changeColor(buttonTous, buttonObjets, buttonAppartements, buttonHotelres);
+//-------}
+//-------});
 
 //AFFICHAGE DES PROJETS OBJETS
 
-buttonObjets.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
+//-------buttonObjets.addEventListener("click", function onClick(event) {
+//ON VIDE LA GALLERIE
 
-  containerGallery.innerHTML = "";
+//-------containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+//ON FILTRE LES PROJETS
 
-  let filteredObjects = workProjects.filter((objects) => {
-    return objects.categoryId == 1;
-  });
+//-------let filteredObjects = workProjects.filter((objects) => {
+//-------return objects.categoryId == 1;
+//-------});
 
-  //console.log(filteredObjects);
+//console.log(filteredObjects);
 
-  //ON AFFICHE LES PROJETS FILTRES
+//ON AFFICHE LES PROJETS FILTRES
 
-  for (projects in filteredObjects) {
-    containerGallery.innerHTML += `<figure>
-    <img src="${filteredObjects[projects].imageUrl}" alt="${filteredObjects[projects].title}">
-    <figcaption>${filteredObjects[projects].title}</figcaption>
-  </figure>`;
-  }
+//-------for (projects in filteredObjects) {
+//-------containerGallery.innerHTML += `<figure>
+//-------<img src="${filteredObjects[projects].imageUrl}" alt="${filteredObjects[projects].title}">
+//-------<figcaption>${filteredObjects[projects].title}</figcaption>
+//-------</figure>`;
+//-------}
 
-  //ON CHANGE LA COULEUR DU BOUTON
+//ON CHANGE LA COULEUR DU BOUTON
 
-  let backgroundColor = buttonObjets.style.backgroundColor;
+//-------let backgroundColor = buttonObjets.style.backgroundColor;
 
-  if (backgroundColor === "#1D6154") {
-    buttonObjets.style.backgroundColor = "white";
-  } else {
-    //buttonObjets.style.backgroundColor = "#1D6154";
-    //buttonObjets.style.color = "white";
-    //buttonTous.style.backgroundColor = "white";
-    //buttonTous.style.color = "#1D6154";
-    //buttonAppartements.style.backgroundColor = "white";
-    //buttonAppartements.style.color = "#1D6154";
-    //buttonHotelres.style.backgroundColor = "white";
-    //buttonHotelres.style.color = "#1D6154";
-    changeColor(buttonObjets, buttonTous, buttonAppartements, buttonHotelres);
-  }
-});
+//-------if (backgroundColor === "#1D6154") {
+//-------buttonObjets.style.backgroundColor = "white";
+//-------} else {
+//buttonObjets.style.backgroundColor = "#1D6154";
+//buttonObjets.style.color = "white";
+//buttonTous.style.backgroundColor = "white";
+//buttonTous.style.color = "#1D6154";
+//buttonAppartements.style.backgroundColor = "white";
+//buttonAppartements.style.color = "#1D6154";
+//buttonHotelres.style.backgroundColor = "white";
+//buttonHotelres.style.color = "#1D6154";
+//-------changeColor(buttonObjets, buttonTous, buttonAppartements, buttonHotelres);
+//-------}
+//-------});
 
 //AFFICHAGE DES PROJETS APPARTEMENTS
 
-buttonAppartements.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
-  containerGallery.innerHTML = "";
+//-------buttonAppartements.addEventListener("click", function onClick(event) {
+//ON VIDE LA GALLERIE
+//-------containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+//ON FILTRE LES PROJETS
 
-  let filteredAppartments = workProjects.filter((appartments) => {
-    return appartments.categoryId == 2;
-  });
+//-------let filteredAppartments = workProjects.filter((appartments) => {
+//-------return appartments.categoryId == 2;
+//-------});
 
-  //console.log(filteredAppartments);
+//console.log(filteredAppartments);
 
-  //ON AFFICHE LES PROJETS FILTRES
+//ON AFFICHE LES PROJETS FILTRES
 
-  for (projects in filteredAppartments) {
-    containerGallery.innerHTML += `<figure>
-    <img src="${filteredAppartments[projects].imageUrl}" alt="${filteredAppartments[projects].title}">
-    <figcaption>${filteredAppartments[projects].title}</figcaption>
-  </figure>`;
-  }
+//-------for (projects in filteredAppartments) {
+//-------containerGallery.innerHTML += `<figure>
+//-------<img src="${filteredAppartments[projects].imageUrl}" alt="${filteredAppartments[projects].title}">
+//-------<figcaption>${filteredAppartments[projects].title}</figcaption>
+//-------</figure>`;
+//-------}
 
-  //ON CHANGE LA COULEUR DU BOUTON
+//ON CHANGE LA COULEUR DU BOUTON
 
-  const backgroundColor = buttonAppartements.style.backgroundColor;
+//-------const backgroundColor = buttonAppartements.style.backgroundColor;
 
-  if (backgroundColor === "#1D6154") {
-    buttonAppartements.style.backgroundColor = "white";
-  } else {
-    //buttonAppartements.style.backgroundColor = "#1D6154";
-    //buttonAppartements.style.color = "white";
-    //buttonTous.style.backgroundColor = "white";
-    //buttonTous.style.color = "#1D6154";
-    //buttonObjets.style.backgroundColor = "white";
-    //buttonObjets.style.color = "#1D6154";
-    //buttonHotelres.style.backgroundColor = "white";
-    //buttonHotelres.style.color = "#1D6154";
-    changeColor(buttonAppartements, buttonTous, buttonObjets, buttonHotelres);
-  }
-});
+//-------if (backgroundColor === "#1D6154") {
+//-------buttonAppartements.style.backgroundColor = "white";
+//-------} else {
+//buttonAppartements.style.backgroundColor = "#1D6154";
+//buttonAppartements.style.color = "white";
+//buttonTous.style.backgroundColor = "white";
+//buttonTous.style.color = "#1D6154";
+//buttonObjets.style.backgroundColor = "white";
+//buttonObjets.style.color = "#1D6154";
+//buttonHotelres.style.backgroundColor = "white";
+//buttonHotelres.style.color = "#1D6154";
+//-------changeColor(buttonAppartements, buttonTous, buttonObjets, buttonHotelres);
+//-------}
+//-------});
 
 //AFFICHAGE DES PROJETS HOTELRES
 
-buttonHotelres.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
-  containerGallery.innerHTML = "";
+//-------buttonHotelres.addEventListener("click", function onClick(event) {
+//ON VIDE LA GALLERIE
+//-------containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+//ON FILTRE LES PROJETS
 
-  let filteredHotelres = workProjects.filter((hotelres) => {
-    return hotelres.categoryId == 3;
-  });
+//-------let filteredHotelres = workProjects.filter((hotelres) => {
+//-------return hotelres.categoryId == 3;
+//-------});
 
-  //console.log(filteredHotelres);
+//console.log(filteredHotelres);
 
-  //ON AFFICHE LES PROJETS FILTRES
+//ON AFFICHE LES PROJETS FILTRES
 
-  for (projects in filteredHotelres) {
-    containerGallery.innerHTML += `<figure>
-    <img src="${filteredHotelres[projects].imageUrl}" alt="${filteredHotelres[projects].title}">
-    <figcaption>${filteredHotelres[projects].title}</figcaption>
-  </figure>`;
-  }
+//-------for (projects in filteredHotelres) {
+//-------containerGallery.innerHTML += `<figure>
+//-------<img src="${filteredHotelres[projects].imageUrl}" alt="${filteredHotelres[projects].title}">
+//-------<figcaption>${filteredHotelres[projects].title}</figcaption>
+//-------</figure>`;
+//-------}
 
-  //ON CHANGE LA COULEUR DU BOUTON
+//ON CHANGE LA COULEUR DU BOUTON
 
-  const backgroundColor = buttonHotelres.style.backgroundColor;
+//-------const backgroundColor = buttonHotelres.style.backgroundColor;
 
-  if (backgroundColor === "#1D6154") {
-    buttonHotelres.style.backgroundColor = "white";
-  } else {
-    //buttonHotelres.style.backgroundColor = "#1D6154";
-    //buttonHotelres.style.color = "white";
-    //buttonTous.style.backgroundColor = "white";
-    //buttonTous.style.color = "#1D6154";
-    //buttonObjets.style.backgroundColor = "white";
-    //buttonObjets.style.color = "#1D6154";
-    //buttonAppartements.style.backgroundColor = "white";
-    //buttonAppartements.style.color = "#1D6154";
-    changeColor(buttonHotelres, buttonTous, buttonObjets, buttonAppartements);
-  }
-});
+//-------if (backgroundColor === "#1D6154") {
+//-------buttonHotelres.style.backgroundColor = "white";
+//-------} else {
+//buttonHotelres.style.backgroundColor = "#1D6154";
+//buttonHotelres.style.color = "white";
+//buttonTous.style.backgroundColor = "white";
+//buttonTous.style.color = "#1D6154";
+//buttonObjets.style.backgroundColor = "white";
+//buttonObjets.style.color = "#1D6154";
+//buttonAppartements.style.backgroundColor = "white";
+//buttonAppartements.style.color = "#1D6154";
+//-------changeColor(buttonHotelres, buttonTous, buttonObjets, buttonAppartements);
+//-------}
+//-------});
 
 //-------------------------------------------------------//
 //-------- PARTIE L'UTILISATEUR EST CONNECTE
