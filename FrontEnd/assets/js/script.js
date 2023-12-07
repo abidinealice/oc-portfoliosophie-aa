@@ -5,9 +5,9 @@
 const urlWorks = "http://localhost:5678/api/works";
 const containerGallery = document.querySelector(".gallery");
 let workProjects = [];
-const urlCategories = "http://localhost:5678/api/categories";
-let categoriesProjects = [];
-const containerCategories = document.querySelector("#categories");
+//const urlCategories = "http://localhost:5678/api/categories";
+//let categoriesProjects = [];
+//const containerCategories = document.querySelector("#categories");
 
 //AFFICHAGE DES PROJETS
 
@@ -15,8 +15,6 @@ async function getWorks() {
   const response = await fetch(urlWorks);
   const works = await response.json();
   workProjects = works;
-  //console.log(works);
-  //console.log(typeof works);
 
   for (projects in works) {
     containerGallery.innerHTML += `<figure>
@@ -37,28 +35,11 @@ async function getWorks() {
   <i class="fa-solid fa-trash-can" id="${[projects]}"></i>
 </figure>`;
   }
-
-  //On crée le localStorage
-
-  //const valuesWorks = JSON.stringify(works);
-  //console.log(typeof valuesWorks);
-
-  //window.localStorage.setItem("works", valuesWorks);
-  //console.log(works);
 }
 
-//LANCEMENT
+//LANCEMENT AFFICHAGE PROJETS
 
 getWorks();
-
-// LOCAL STORAGE
-
-//let work = window.localStorage.getItem("works");
-//console.log(work);
-//console.log(typeof work);
-
-//console.log(workProjects);
-//console.log(typeof workProjects);
 
 // BOUTON FILTRES + COULEURS
 
@@ -87,29 +68,12 @@ function changeColor(btn1, btn2, btn3, btn4) {
   changeColorBtnOff(btn4);
 }
 
-//AFFICHAGE DE TOUS LES PROJETS
+//AFFICHAGE DE TOUS LES PROJETS AU CLICK SUR LE BOUTON
 
 buttonTous.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
 
   containerGallery.innerHTML = "";
-
-  //ON FILTRE LES PROJETS
-
-  //const filteredTous = workProjects.filter((tous) => {
-  //return tous.categoryId == 1 || tous.categoryId == 2 || tous.categoryId == 3;
-  //});
-
-  //console.log(filteredTous);
-
-  //ON AFFICHE LES PROJETS FILTRES
-
-  //for (projects in filteredTous) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredTous[projects].imageUrl}" alt="${filteredTous[projects].title}">
-  //<figcaption>${filteredTous[projects].title}</figcaption>
-  //</figure>`;
-  //}
 
   for (projects in workProjects) {
     containerGallery.innerHTML += `<figure>
@@ -123,23 +87,11 @@ buttonTous.addEventListener("click", function onClick(event) {
   let backgroundColor = buttonTous.style.backgroundColor;
 
   if (backgroundColor === "white") {
-    //buttonTous.style.backgroundColor = "#1D6154";
-    //buttonTous.style.color = "white";
-    //buttonObjets.style.backgroundColor = "white";
-    //buttonObjets.style.color = "#1D6154";
-    //buttonAppartements.style.backgroundColor = "white";
-    //buttonAppartements.style.color = "#1D6154";
-    //buttonHotelres.style.backgroundColor = "white";
-    //buttonHotelres.style.color = "#1D6154";
-    //changeColorBtnOn(buttonTous);
-    //changeColorBtnOff(buttonObjets);
-    //changeColorBtnOff(buttonAppartements);
-    //changeColorBtnOff(buttonHotelres);
     changeColor(buttonTous, buttonObjets, buttonAppartements, buttonHotelres);
   }
 });
 
-//AFFICHAGE DES PROJETS OBJETS
+//AFFICHAGE DES PROJETS OBJETS AU CLICK SUR LE BOUTON
 
 buttonObjets.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
@@ -151,8 +103,6 @@ buttonObjets.addEventListener("click", function onClick(event) {
   let filteredObjects = workProjects.filter((objects) => {
     return objects.categoryId == 1;
   });
-
-  //console.log(filteredObjects);
 
   //ON AFFICHE LES PROJETS FILTRES
 
@@ -170,19 +120,11 @@ buttonObjets.addEventListener("click", function onClick(event) {
   if (backgroundColor === "#1D6154") {
     buttonObjets.style.backgroundColor = "white";
   } else {
-    //buttonObjets.style.backgroundColor = "#1D6154";
-    //buttonObjets.style.color = "white";
-    //buttonTous.style.backgroundColor = "white";
-    //buttonTous.style.color = "#1D6154";
-    //buttonAppartements.style.backgroundColor = "white";
-    //buttonAppartements.style.color = "#1D6154";
-    //buttonHotelres.style.backgroundColor = "white";
-    //buttonHotelres.style.color = "#1D6154";
     changeColor(buttonObjets, buttonTous, buttonAppartements, buttonHotelres);
   }
 });
 
-//AFFICHAGE DES PROJETS APPARTEMENTS
+//AFFICHAGE DES PROJETS APPARTEMENTS AU CLICK SUR LE BOUTON
 
 buttonAppartements.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
@@ -193,8 +135,6 @@ buttonAppartements.addEventListener("click", function onClick(event) {
   let filteredAppartments = workProjects.filter((appartments) => {
     return appartments.categoryId == 2;
   });
-
-  //console.log(filteredAppartments);
 
   //ON AFFICHE LES PROJETS FILTRES
 
@@ -212,19 +152,11 @@ buttonAppartements.addEventListener("click", function onClick(event) {
   if (backgroundColor === "#1D6154") {
     buttonAppartements.style.backgroundColor = "white";
   } else {
-    //buttonAppartements.style.backgroundColor = "#1D6154";
-    //buttonAppartements.style.color = "white";
-    //buttonTous.style.backgroundColor = "white";
-    //buttonTous.style.color = "#1D6154";
-    //buttonObjets.style.backgroundColor = "white";
-    //buttonObjets.style.color = "#1D6154";
-    //buttonHotelres.style.backgroundColor = "white";
-    //buttonHotelres.style.color = "#1D6154";
     changeColor(buttonAppartements, buttonTous, buttonObjets, buttonHotelres);
   }
 });
 
-//AFFICHAGE DES PROJETS HOTELRES
+//AFFICHAGE DES PROJETS HOTELRES AU CLICK SUR LE BOUTON
 
 buttonHotelres.addEventListener("click", function onClick(event) {
   //ON VIDE LA GALLERIE
@@ -235,8 +167,6 @@ buttonHotelres.addEventListener("click", function onClick(event) {
   let filteredHotelres = workProjects.filter((hotelres) => {
     return hotelres.categoryId == 3;
   });
-
-  //console.log(filteredHotelres);
 
   //ON AFFICHE LES PROJETS FILTRES
 
@@ -254,14 +184,6 @@ buttonHotelres.addEventListener("click", function onClick(event) {
   if (backgroundColor === "#1D6154") {
     buttonHotelres.style.backgroundColor = "white";
   } else {
-    //buttonHotelres.style.backgroundColor = "#1D6154";
-    //buttonHotelres.style.color = "white";
-    //buttonTous.style.backgroundColor = "white";
-    //buttonTous.style.color = "#1D6154";
-    //buttonObjets.style.backgroundColor = "white";
-    //buttonObjets.style.color = "#1D6154";
-    //buttonAppartements.style.backgroundColor = "white";
-    //buttonAppartements.style.color = "#1D6154";
     changeColor(buttonHotelres, buttonTous, buttonObjets, buttonAppartements);
   }
 });
@@ -309,7 +231,6 @@ if (valueToken == null) {
 if (valueToken !== null && logout.hasAttribute("hidden")) {
   logout.removeAttribute("hidden");
   login.setAttribute("hidden", "");
-  //console.log(login);
   modal.style.visibility = "hidden";
 
   //SHOW MODAL
@@ -318,7 +239,6 @@ if (valueToken !== null && logout.hasAttribute("hidden")) {
 
   btnModalShow.addEventListener("click", function onClick(event) {
     modal.style.visibility = "visible";
-    //console.log(modal);
   });
 }
 
