@@ -12,28 +12,47 @@ let workProjects = [];
 //AFFICHAGE DES PROJETS
 
 async function getWorks() {
-  const response = await fetch(urlWorks);
-  const works = await response.json();
-  workProjects = works;
+  let err = "La connexion au serveur a échoué";
+  try {
+    const response = await fetch(urlWorks);
+    const works = await response.json();
+    workProjects = works;
+    console.log(workProjects);
 
-  for (projects in works) {
-    containerGallery.innerHTML += `<figure>
+    for (projects in works) {
+      containerGallery.innerHTML += `<figure>
     <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
     <figcaption>${works[projects].title}</figcaption>
 </figure>`;
-  }
+    }
 
-  //GALLERY MODAL --- AFFICHAGE
+    //GALLERY MODAL --- AFFICHAGE
 
-  const modalContainerGallery = document.querySelector(".modal-gallery");
+    const modalContainerGallery = document.querySelector(".modal-gallery");
 
-  for (projects in workProjects) {
-    modalContainerGallery.innerHTML += `<figure data-id="${[projects]}">
-  <img src="${workProjects[projects].imageUrl}" alt="${
-      workProjects[projects].title
-    }">
-  <i class="fa-solid fa-trash-can" id="${[projects]}"></i>
-</figure>`;
+    for (projects in workProjects) {
+      //modalContainerGallery.innerHTML += `<figure data-id="${[projects]}">
+      //<img src="${workProjects[projects].imageUrl}" alt="${
+      //workProjects[projects].title
+      //}">
+      //<i class="fa-solid fa-trash-can" id="${[projects]}"></i>
+      //</figure>`;
+      let htmlFigure = document.createElement("figure");
+
+      let htmlImg = document.createElement("img");
+      htmlImg.setAttribute("src", workProjects[projects].imageUrl);
+      htmlImg.setAttribute("alt", workProjects[projects].title);
+
+      let htmlId = document.createElement("i");
+      htmlId.setAttribute("class", "fa-solid fa-trash-can");
+      htmlId.setAttribute("id", [projects]);
+
+      htmlFigure.appendChild(htmlImg);
+      htmlFigure.appendChild(htmlId);
+      modalContainerGallery.appendChild(htmlFigure);
+    }
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -195,8 +214,8 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //LOG OUT
 //window.sessionStorage.setItem("valueToken", utilToken);
 let token = window.sessionStorage.getItem("valueToken");
-let valueToken = JSON.parse(token);
-console.log(valueToken);
+console.log(token);
+console.log(typeof token);
 
 const logout = document.querySelector(".lien-logout");
 const login = document.querySelector(".lien-login");
@@ -216,7 +235,7 @@ const modal = document.querySelector("#modal1");
 //Si l'utilisateur n'est pas connecté:
 // - on cache le mode édition
 
-if (valueToken == null) {
+if (token == null) {
   editingMode.remove();
   editing.remove();
   modal.style.visibility = "hidden";
@@ -228,7 +247,7 @@ if (valueToken == null) {
 // - on cache le login
 // - on active le logout
 
-if (valueToken !== null && logout.hasAttribute("hidden")) {
+if (token !== null && logout.hasAttribute("hidden")) {
   logout.removeAttribute("hidden");
   login.setAttribute("hidden", "");
   modal.style.visibility = "hidden";
@@ -252,3 +271,16 @@ modalBtnHide.addEventListener("click", function onClick(event) {
 });
 
 //GALLERY MODAL --- SUPPRIMER PROJET
+
+const modalContainerGallery = document.querySelector(".modal-gallery");
+
+modalContainerGallery.addEventListener("click", function onClick(e) {
+  if (e.target.classList.contains("fa-trash-can")) {
+    console.log(e.target.id);
+    const workId = e.target.id;
+    fetch(`http://localhost:5678/api/works/${workId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+});

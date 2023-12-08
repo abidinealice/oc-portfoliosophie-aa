@@ -2,6 +2,7 @@ const urlLogin = "http://localhost:5678/api/users/login";
 const formLogin = document.querySelector(".form-login");
 
 const msgError = document.querySelector(".msg-error");
+let letoken = [];
 
 formLogin.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -17,31 +18,36 @@ formLogin.addEventListener("submit", function (event) {
   const chargeUtile = JSON.stringify(formData);
 
   // ON ENVOIE LES DONNES
+
   async function sendForm() {
-    const response = await fetch(urlLogin, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: chargeUtile,
-    });
-    const valueToken = await response.json();
+    let error = "La connexion au serveur a échoué";
+    try {
+      const response = await fetch(urlLogin, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: chargeUtile,
+      });
+      const valueToken = await response.json();
+      if (response.ok) {
+        const utilToken = valueToken.token;
+        window.sessionStorage.setItem("valueToken", utilToken);
 
-    if (response.ok) {
-      const utilToken = JSON.stringify(valueToken);
-      window.sessionStorage.setItem("valueToken", utilToken);
+        //On cache le message d'erreur s'il est affiché
+        if (msgError.hasAttribute("hidden") == false) {
+          msgError.setAttribute("hidden", "");
+        }
 
-      //On cache le message d'erreur s'il est affiché
-      if (msgError.hasAttribute("hidden") == false) {
-        msgError.setAttribute("hidden", "");
+        window.location.href = "./index.html";
+      } else {
+        //on affiche le message d'erreur si l'utilisateur s'est trompé dans l'email ou mdp
+        if (msgError.hasAttributes("hidden")) {
+          msgError.removeAttribute("hidden");
+        }
       }
-
-      window.location.href = "./index.html";
-    } else {
-      //on affiche le message d'erreur si l'utilisateur s'est trompé dans l'email ou mdp
-      if (msgError.hasAttributes("hidden")) {
-        msgError.removeAttribute("hidden");
-      }
+    } catch (error) {
+      console.error(error);
     }
   }
   sendForm();
