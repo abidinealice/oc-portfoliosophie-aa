@@ -278,6 +278,7 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
   if (e.target.classList.contains("fa-trash-can")) {
     console.log(e.target.id);
     const workId = e.target.id;
+
     fetch(`http://localhost:5678/api/works/${workId}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
