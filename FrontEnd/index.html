@@ -79,18 +79,43 @@
             aria-labelledby="title-modal"
           >
             <div class="modal-wrapper">
-              <img
-                src="assets/icons/xmark-solid.svg"
-                alt="Icon xmark"
-                class="btn-modal-hide"
-              />
-              <p id="title-modal">Gallerie photo</p>
-              <div class="modal-container-gallery">
-                <div class="modal-gallery"></div>
+              <div class="modal-wrapper-gallery">
+                <img
+                  src="assets/icons/xmark-solid.svg"
+                  alt="Icon xmark"
+                  class="btn-modal-xmark"
+                />
+                <p id="title-modal">Gallerie photo</p>
+                <div class="modal-container-gallery">
+                  <div class="modal-gallery"></div>
+                </div>
+                <span></span>
+                <div class="btn-modal-ajout">
+                  <button>Ajouter une photo</button>
+                </div>
               </div>
-              <span></span>
-              <div class="btn-modal-ajout">
-                <button>Ajouter une photo</button>
+
+              <div class="modal-wrapper-add" hidden>
+                <div class="icons-arrow-xmark">
+                  <img
+                    src="assets/icons/arrowleft.svg"
+                    alt="Icon arrowleft"
+                    class="btn-modal-arrowleft"
+                  />
+                  <img
+                    src="assets/icons/xmark-solid.svg"
+                    alt="Icon xmark"
+                    class="btn-modal-xmark-add"
+                  />
+                </div>
+                <p id="title-modal">Ajout photo</p>
+                <div class="modal-container-add">
+                  <div class="modal-add"></div>
+                </div>
+                <span></span>
+                <div class="btn-modal-ajout">
+                  <button>Valider</button>
+                </div>
               </div>
             </div>
           </aside>

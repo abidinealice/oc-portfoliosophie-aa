@@ -262,11 +262,15 @@ if (token !== null && logout.hasAttribute("hidden")) {
 }
 
 //HIDE MODAL
+//lorsqu'on clique sur icon x, le modal se désactive/se ferme
 
-const modalBtnHide = document.querySelector(".btn-modal-hide");
-console.log(modalBtnHide.id);
+const modalBtnXMark = document.querySelector(".btn-modal-xmark");
+const modalBtnXMarkAdd = document.querySelector(".btn-modal-xmark-add");
 
-modalBtnHide.addEventListener("click", function onClick(event) {
+modalBtnXMark.addEventListener("click", function onClick(event) {
+  modal.style.visibility = "hidden";
+});
+modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
   modal.style.visibility = "hidden";
 });
 
@@ -284,4 +288,23 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+});
+
+//MODAL --- AJOUT
+
+const modalBtnAjout = document.querySelector(".btn-modal-ajout");
+const modalGallery = document.querySelector(".modal-wrapper-gallery");
+const modalAdd = document.querySelector(".modal-wrapper-add");
+const modalBtnArrowLeft = document.querySelector(".btn-modal-arrowleft");
+
+modalBtnAjout.addEventListener("click", function onClick(ev) {
+  modalGallery.style.display = "none";
+  modalAdd.removeAttribute("hidden");
+  modalAdd.style.display = "";
+});
+
+modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
+  modalGallery.style.display = "";
+  modalAdd.style.display = "none";
+  modalAdd.setAttribute("hidden", "");
 });

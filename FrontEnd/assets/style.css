@@ -428,7 +428,8 @@ input[type="submit"] {
   background-color: #ffffff;
 }
 
-.modal-wrapper img {
+.modal-wrapper .btn-modal-xmark,
+.btn-modal-xmark-add {
   width: 24px;
   height: 24px;
   margin-left: 95%;
@@ -445,7 +446,8 @@ input[type="submit"] {
   margin-bottom: 1.5em;
 }
 
-.modal-container-gallery {
+.modal-container-gallery,
+modal-container-add {
   display: flex;
   justify-content: center;
 }
@@ -493,4 +495,9 @@ input[type="submit"] {
 .btn-modal-ajout {
   display: flex;
   justify-content: center;
+}
+
+.icons-arrow-xmark {
+  display: flex;
+  margin: 0 5% 1em 5%;
 }
