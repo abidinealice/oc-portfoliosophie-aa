@@ -109,12 +109,34 @@
                   />
                 </div>
                 <p id="title-modal">Ajout photo</p>
-                <div class="modal-container-add">
-                  <div class="modal-add"></div>
-                </div>
-                <span></span>
-                <div class="btn-modal-ajout">
-                  <button>Valider</button>
+                <div class="modal-add">
+                  <form class="modal-add-form">
+                    <label for="modal-add-title">Titre</label>
+                    <input
+                      type="text"
+                      id="modal-add-title"
+                      name="title"
+                      class="modal-add-input"
+                      required
+                    />
+                    <label for="modal-add-category">Catégorie</label>
+                    <select
+                      name="category"
+                      id="modal-add-category"
+                      class="modal-add-input"
+                    >
+                      <option value=""></option>
+                      <option value="objet">Objets</option>
+                      <option value="appartements">Appartements</option>
+                      <option value="hotelsres">Hôtels & restaurants</option>
+                    </select>
+                    <span></span>
+                    <input
+                      type="submit"
+                      value="Valider"
+                      class="modal-add-btn"
+                    />
+                  </form>
                 </div>
               </div>
             </div>
