@@ -316,6 +316,7 @@ modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
 
 const modalAddBtnAdd = document.querySelector(".modal-add-picture-btn");
 const modalAddBtnInput = document.querySelector("#modal-add-picture-input");
+const modalContainerAddPicture = document.querySelector(".modal-add-picture");
 
 modalAddBtnAdd.addEventListener("click", function onClick(event) {
   modalAddBtnInput.click();
