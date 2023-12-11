@@ -296,7 +296,7 @@ const modalBtnAdd = document.querySelector(".btn-modal-ajout");
 const modalGallery = document.querySelector(".modal-wrapper-gallery");
 const modalAdd = document.querySelector(".modal-wrapper-add");
 const modalBtnArrowLeft = document.querySelector(".btn-modal-arrowleft");
-const modalFormAdd = document.querySelector("modal-add-form");
+const modalFormAdd = document.querySelector(".modal-add-form");
 
 modalBtnAdd.addEventListener("click", function onClick(ev) {
   modalGallery.style.display = "none";
@@ -309,6 +309,19 @@ modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
   modalAdd.style.display = "none";
   modalAdd.setAttribute("hidden", "");
 });
+
+//AJOUT PHOTO
+
+//IMPORTATION IMAGE
+
+const modalAddBtnAdd = document.querySelector(".modal-add-picture-btn");
+const modalAddBtnInput = document.querySelector("#modal-add-picture-input");
+
+modalAddBtnAdd.addEventListener("click", function onClick(event) {
+  modalAddBtnInput.click();
+});
+
+// ENVOIE DU FORMULAIRE
 
 modalFormAdd.addEventListener("submit", function (event) {
   event.preventDefault();
