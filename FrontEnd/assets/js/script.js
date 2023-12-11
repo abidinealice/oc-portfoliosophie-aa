@@ -290,14 +290,15 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
   }
 });
 
-//MODAL --- AJOUT
+//ADD MODAL --- AJOUTER PROJET
 
-const modalBtnAjout = document.querySelector(".btn-modal-ajout");
+const modalBtnAdd = document.querySelector(".btn-modal-ajout");
 const modalGallery = document.querySelector(".modal-wrapper-gallery");
 const modalAdd = document.querySelector(".modal-wrapper-add");
 const modalBtnArrowLeft = document.querySelector(".btn-modal-arrowleft");
+const modalFormAdd = document.querySelector("modal-add-form");
 
-modalBtnAjout.addEventListener("click", function onClick(ev) {
+modalBtnAdd.addEventListener("click", function onClick(ev) {
   modalGallery.style.display = "none";
   modalAdd.removeAttribute("hidden");
   modalAdd.style.display = "";
@@ -307,4 +308,8 @@ modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
   modalGallery.style.display = "";
   modalAdd.style.display = "none";
   modalAdd.setAttribute("hidden", "");
+});
+
+modalFormAdd.addEventListener("submit", function (event) {
+  event.preventDefault();
 });
