@@ -314,16 +314,44 @@ modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
 
 //IMPORTATION IMAGE
 
-const modalAddBtnAdd = document.querySelector(".modal-add-picture-btn");
-const modalAddBtnInput = document.querySelector("#modal-add-picture-input");
 const modalContainerAddPicture = document.querySelector(".modal-add-picture");
+const modalAddImg = document.querySelector(".modal-add-picture-img");
+const modalAddBtn = document.querySelector(".modal-add-picture-btn");
+const modalAddBtnInput = document.querySelector("#modal-add-picture-input");
+const modalAddPreview = document.querySelector(".modal-add-picture-preview");
+const modalAddTxt = document.querySelector(".modal-add-picture-txt");
 
-modalAddBtnAdd.addEventListener("click", function onClick(event) {
+modalAddBtn.addEventListener("click", function onClick(event) {
   modalAddBtnInput.click();
+  modalAddImg.style.display = "none";
+  modalAddBtn.style.display = "none";
+  modalAddTxt.style.display = "none";
+  console.log(modalAddPreview);
 });
+
+function previewFile() {
+  const file = modalAddBtnInput.files[0];
+  const reader = new FileReader();
+
+  reader.addEventListener(
+    "load",
+    () => {
+      // on convertit l'image en une chaîne de caractères base64 + affichage de l'image
+      modalAddPreview.src = reader.result;
+      modalAddPreview.style.display = "block";
+    },
+    false
+  );
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+}
 
 // ENVOIE DU FORMULAIRE
 
 modalFormAdd.addEventListener("submit", function (event) {
   event.preventDefault();
+  let formElem = new FormData(modalFormAdd);
+  console.log(modalFormAdd);
 });

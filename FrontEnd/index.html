@@ -122,9 +122,14 @@
                     <input
                       type="file"
                       id="modal-add-picture-input"
-                      name=""
+                      onchange="previewFile()"
                       accept=".jpg, .png"
                       max-file-size="4194304"
+                    />
+                    <img
+                      src=""
+                      alt="Prévisualisation de l'image"
+                      class="modal-add-picture-preview"
                     />
                     <p class="modal-add-picture-txt">jpg, png : 4mo max</p>
                   </div>

@@ -491,6 +491,12 @@ footer nav ul {
   display: none;
 }
 
+.modal-add-picture .modal-add-picture-preview {
+  display: none;
+  margin: 0 auto 10px auto;
+  height: 200px;
+}
+
 .modal-add-picture .modal-add-picture-txt {
   font-family: Work Sans;
   font-size: 10px;
