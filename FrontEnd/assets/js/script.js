@@ -321,37 +321,102 @@ const modalAddBtnInput = document.querySelector("#modal-add-picture-input");
 const modalAddPreview = document.querySelector(".modal-add-picture-preview");
 const modalAddTxt = document.querySelector(".modal-add-picture-txt");
 
-modalAddBtn.addEventListener("click", function onClick(event) {
-  modalAddBtnInput.click();
-  modalAddImg.style.display = "none";
-  modalAddBtn.style.display = "none";
-  modalAddTxt.style.display = "none";
-  console.log(modalAddPreview);
-});
-
 function previewFile() {
   const file = modalAddBtnInput.files[0];
   const reader = new FileReader();
 
-  reader.addEventListener(
-    "load",
-    () => {
-      // on convertit l'image en une chaîne de caractères base64 + affichage de l'image
-      modalAddPreview.src = reader.result;
-      modalAddPreview.style.display = "block";
-    },
-    false
-  );
-
+  reader.addEventListener("load", (event) => {
+    // on convertit l'image en une chaîne de caractères base64
+    modalAddPreview.src = reader.result;
+    modalAddPreview.style.display = "block";
+  });
   if (file) {
     reader.readAsDataURL(file);
   }
 }
 
+modalAddBtnInput.addEventListener("change", (event) => {
+  previewFile();
+});
+
+modalAddBtn.addEventListener("click", function onClick(event) {
+  modalAddBtnInput.click();
+  modalAddImg.style.display = "none";
+  modalAddBtn.style.display = "none";
+  modalAddTxt.style.display = "none";
+  modalContainerAddPicture.style.padding = "0";
+});
+
 // ENVOIE DU FORMULAIRE
+
+function setCategoryId(str) {
+  if (str == "objet") {
+    return "1";
+  } else if (str == "appartements") {
+    return "2";
+  } else if (str == "hotelsres") {
+    return "3";
+  }
+}
 
 modalFormAdd.addEventListener("submit", function (event) {
   event.preventDefault();
-  let formElem = new FormData(modalFormAdd);
-  console.log(modalFormAdd);
+
+  const formImg = modalAddPreview.src;
+  const formTitle = event.target.querySelector("[name=title]").value;
+  const formCategory = event.target.querySelector("[name=category]").value;
+  const msgError = document.querySelector(".msg-error");
+
+  function validForm(form) {
+    if (
+      formImg == "http://127.0.0.1:5500/FrontEnd/index.html" ||
+      formTitle == "" ||
+      formCategory === undefined
+    ) {
+      msgError.removeAttribute("hidden");
+    } else {
+      return true;
+    }
+  }
+
+  const formData = {
+    img: formImg,
+    title: formTitle,
+    category: setCategoryId(formCategory),
+  };
+
+  if (validForm(formData) == true) {
+    //on peut envoyer le formulaire
+
+    //Creation de la charge utile au format JSON
+    const chargeUtile = JSON.stringify(formData);
+
+    // ON ENVOIE LES DONNES
+
+    async function sendForm() {
+      let error = "La connexion au serveur a échoué";
+      try {
+        const response = await fetch(urlWorks, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: chargeUtile,
+        });
+        if (response.ok) {
+          modal.style.visibility = "hidden";
+        } else {
+          //on affiche le message d'erreur si l'utilisateur s'est trompé dans l'email ou mdp
+          if (msgError.hasAttributes("hidden")) {
+            msgError.removeAttribute("hidden");
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    sendForm();
+  }
+
+  console.log(formData);
 });

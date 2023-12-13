@@ -122,7 +122,6 @@
                     <input
                       type="file"
                       id="modal-add-picture-input"
-                      onchange="previewFile()"
                       accept=".jpg, .png"
                       max-file-size="4194304"
                     />
@@ -149,6 +148,9 @@
                       <option value="hotelsres">Hôtels & restaurants</option>
                     </select>
                     <span></span>
+                    <div class="msg-error" hidden>
+                      <p>Le formulaire n'a pas été correctement rempli</p>
+                    </div>
                     <input
                       type="submit"
                       value="Valider"
