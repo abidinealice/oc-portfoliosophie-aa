@@ -399,7 +399,7 @@ modalFormAdd.addEventListener("submit", function (event) {
         const response = await fetch(urlWorks, {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
           body: chargeUtile,
         });
