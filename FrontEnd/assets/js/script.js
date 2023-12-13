@@ -278,15 +278,38 @@ modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
 
 const modalContainerGallery = document.querySelector(".modal-gallery");
 
+//modalContainerGallery.addEventListener("click", function onClick(e) {
+//if (e.target.classList.contains("fa-trash-can")) {
+//console.log(e.target.id);
+//const workId = e.target.id;
+
+//fetch(`http://localhost:5678/api/works/${workId}`, {
+//method: "DELETE",
+//headers: { Authorization: `Bearer ${token}` },
+//});
+//}
+//});
 modalContainerGallery.addEventListener("click", function onClick(e) {
   if (e.target.classList.contains("fa-trash-can")) {
     console.log(e.target.id);
     const workId = e.target.id;
 
-    fetch(`http://localhost:5678/api/works/${workId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    async function deleteProjects() {
+      let err = "Le projet n est pas supprimé";
+      try {
+        const res = await fetch(`http://localhost:5678/api/works/${workId}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          //on actualise les projets
+          getWorks();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    deleteProjects();
   }
 });
 
@@ -362,17 +385,13 @@ function setCategoryId(str) {
 modalFormAdd.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const formImg = modalAddPreview.src;
+  const formImg = modalAddPreview.getAttribute("src");
   const formTitle = event.target.querySelector("[name=title]").value;
   const formCategory = event.target.querySelector("[name=category]").value;
   const msgError = document.querySelector(".msg-error");
 
   function validForm(form) {
-    if (
-      formImg == "http://127.0.0.1:5500/FrontEnd/index.html" ||
-      formTitle == "" ||
-      formCategory === undefined
-    ) {
+    if (formImg == "" || formTitle == "" || formCategory === undefined) {
       msgError.removeAttribute("hidden");
     } else {
       return true;
@@ -406,7 +425,7 @@ modalFormAdd.addEventListener("submit", function (event) {
         if (response.ok) {
           modal.style.visibility = "hidden";
         } else {
-          //on affiche le message d'erreur si l'utilisateur s'est trompé dans l'email ou mdp
+          //on affiche le message d'erreur
           if (msgError.hasAttributes("hidden")) {
             msgError.removeAttribute("hidden");
           }
@@ -415,7 +434,7 @@ modalFormAdd.addEventListener("submit", function (event) {
         console.error(error);
       }
     }
-    sendForm();
+    //sendForm();
   }
 
   console.log(formData);
