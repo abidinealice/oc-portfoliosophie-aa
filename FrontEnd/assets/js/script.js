@@ -20,7 +20,7 @@ async function getWorks() {
     console.log(workProjects);
 
     for (projects in works) {
-      containerGallery.innerHTML += `<figure>
+      containerGallery.innerHTML += `<figure data-id="${[projects]}" >
     <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
     <figcaption>${works[projects].title}</figcaption>
 </figure>`;
@@ -38,6 +38,7 @@ async function getWorks() {
       //<i class="fa-solid fa-trash-can" id="${[projects]}"></i>
       //</figure>`;
       let htmlFigure = document.createElement("figure");
+      htmlFigure.setAttribute("data-id", [projects]);
 
       let htmlImg = document.createElement("img");
       htmlImg.setAttribute("src", workProjects[projects].imageUrl);
