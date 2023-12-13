@@ -11,15 +11,6 @@ let workProjects = [];
 
 //AFFICHAGE DES PROJETS
 
-function displayProjects(tab) {
-  for (projects in tab) {
-    containerGallery.innerHTML += `<figure>
-<img src="${tab[projects].imageUrl}" alt="${tab[projects].title}">
-<figcaption>${tab[projects].title}</figcaption>
-</figure>`;
-  }
-}
-
 async function getWorks() {
   let err = "La connexion au serveur a échoué";
   try {
@@ -28,13 +19,12 @@ async function getWorks() {
     workProjects = works;
     console.log(workProjects);
 
-    //for (projects in works) {
-    //containerGallery.innerHTML += `<figure>
-    //<img src="${works[projects].imageUrl}" alt="${works[projects].title}">
-    //<figcaption>${works[projects].title}</figcaption>
-    //</figure>`;
-    //}
-    displayProjects(works);
+    for (projects in works) {
+      containerGallery.innerHTML += `<figure>
+    <img src="${works[projects].imageUrl}" alt="${works[projects].title}">
+    <figcaption>${works[projects].title}</figcaption>
+</figure>`;
+    }
 
     //GALLERY MODAL --- AFFICHAGE
 
@@ -104,14 +94,12 @@ buttonTous.addEventListener("click", function onClick(event) {
 
   containerGallery.innerHTML = "";
 
-  //for (projects in workProjects) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
-  //<figcaption>${workProjects[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(workProjects);
+  for (projects in workProjects) {
+    containerGallery.innerHTML += `<figure>
+<img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
+<figcaption>${workProjects[projects].title}</figcaption>
+</figure>`;
+  }
 
   //ON CHANGE LA COULEUR DU BOUTON
 
@@ -137,14 +125,12 @@ buttonObjets.addEventListener("click", function onClick(event) {
 
   //ON AFFICHE LES PROJETS FILTRES
 
-  //for (projects in filteredObjects) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredObjects[projects].imageUrl}" alt="${filteredObjects[projects].title}">
-  //<figcaption>${filteredObjects[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(filteredObjects);
+  for (projects in filteredObjects) {
+    containerGallery.innerHTML += `<figure>
+<img src="${filteredObjects[projects].imageUrl}" alt="${filteredObjects[projects].title}">
+<figcaption>${filteredObjects[projects].title}</figcaption>
+</figure>`;
+  }
 
   //ON CHANGE LA COULEUR DU BOUTON
 
@@ -171,14 +157,12 @@ buttonAppartements.addEventListener("click", function onClick(event) {
 
   //ON AFFICHE LES PROJETS FILTRES
 
-  //for (projects in filteredAppartments) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredAppartments[projects].imageUrl}" alt="${filteredAppartments[projects].title}">
-  //<figcaption>${filteredAppartments[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(filteredAppartments);
+  for (projects in filteredAppartments) {
+    containerGallery.innerHTML += `<figure>
+<img src="${filteredAppartments[projects].imageUrl}" alt="${filteredAppartments[projects].title}">
+<figcaption>${filteredAppartments[projects].title}</figcaption>
+</figure>`;
+  }
 
   //ON CHANGE LA COULEUR DU BOUTON
 
@@ -205,14 +189,12 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 
   //ON AFFICHE LES PROJETS FILTRES
 
-  //for (projects in filteredHotelres) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredHotelres[projects].imageUrl}" alt="${filteredHotelres[projects].title}">
-  //<figcaption>${filteredHotelres[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(filteredHotelres);
+  for (projects in filteredHotelres) {
+    containerGallery.innerHTML += `<figure>
+<img src="${filteredHotelres[projects].imageUrl}" alt="${filteredHotelres[projects].title}">
+<figcaption>${filteredHotelres[projects].title}</figcaption>
+</figure>`;
+  }
 
   //ON CHANGE LA COULEUR DU BOUTON
 
@@ -296,38 +278,15 @@ modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
 
 const modalContainerGallery = document.querySelector(".modal-gallery");
 
-//modalContainerGallery.addEventListener("click", function onClick(e) {
-//if (e.target.classList.contains("fa-trash-can")) {
-//console.log(e.target.id);
-//const workId = e.target.id;
-
-//fetch(`http://localhost:5678/api/works/${workId}`, {
-//method: "DELETE",
-//headers: { Authorization: `Bearer ${token}` },
-//});
-//}
-//});
 modalContainerGallery.addEventListener("click", function onClick(e) {
   if (e.target.classList.contains("fa-trash-can")) {
     console.log(e.target.id);
     const workId = e.target.id;
 
-    async function deleteProjects() {
-      let err = "Le projet n est pas supprimé";
-      try {
-        const res = await fetch(`http://localhost:5678/api/works/${workId}`, {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res.ok) {
-          //on actualise les projets
-          getWorks();
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    deleteProjects();
+    fetch(`http://localhost:5678/api/works/${workId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 });
 
