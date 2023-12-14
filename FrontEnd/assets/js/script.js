@@ -7,7 +7,7 @@ const containerGallery = document.querySelector(".gallery");
 let workProjects = [];
 //const urlCategories = "http://localhost:5678/api/categories";
 //let categoriesProjects = [];
-//const containerCategories = document.querySelector("#categories");
+const containerCategories = document.querySelector("#categories");
 
 //AFFICHAGE DES PROJETS
 
@@ -234,7 +234,6 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //window.sessionStorage.setItem("valueToken", utilToken);
 let token = window.sessionStorage.getItem("valueToken");
 console.log(token);
-console.log(typeof token);
 
 const logout = document.querySelector(".lien-logout");
 const login = document.querySelector(".lien-login");
@@ -248,6 +247,7 @@ logout.addEventListener("click", function onClick(event) {
 //HIDE OR SHOW MODE EDITION
 
 const editingMode = document.querySelector(".editing-mode");
+const procjectSection = document.querySelector(".section-project");
 const editing = document.querySelector(".editing");
 const modal = document.querySelector("#modal1");
 
@@ -265,11 +265,14 @@ if (token == null) {
 // - on affiche le mode édition
 // - on cache le login
 // - on active le logout
+// - on cache les boutons catégories
 
 if (token !== null && logout.hasAttribute("hidden")) {
   logout.removeAttribute("hidden");
   login.setAttribute("hidden", "");
   modal.style.visibility = "hidden";
+  containerCategories.style.display = "none";
+  procjectSection.style.margin = "0 0 50px 0";
 
   //SHOW MODAL
   //lorsqu'on clique sur "modifier", le modal s'active/s'ouvre
