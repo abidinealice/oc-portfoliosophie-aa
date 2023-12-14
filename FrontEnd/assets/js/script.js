@@ -272,7 +272,7 @@ if (token !== null && logout.hasAttribute("hidden")) {
   login.setAttribute("hidden", "");
   modal.style.visibility = "hidden";
   containerCategories.style.display = "none";
-  procjectSection.style.margin = "0 0 50px 0";
+  procjectSection.style.marginBottom = "70px";
 
   //SHOW MODAL
   //lorsqu'on clique sur "modifier", le modal s'active/s'ouvre
