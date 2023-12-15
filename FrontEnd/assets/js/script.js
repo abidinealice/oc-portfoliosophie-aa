@@ -300,26 +300,57 @@ modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
 
 const modalContainerGallery = document.querySelector(".modal-gallery");
 
-function removeProject() {
-  if (workId == "1") {
-    const elements = document.querySelectorAll("['data-id'= '1']");
-    remove.elements();
-  } else if (workId == "2") {
-    const elements = document.querySelectorAll("['data-id'= '2']");
-    remove.elements();
-  } else if (workId == "3") {
-    const elements = document.querySelectorAll("['data-id'= '3']");
-    remove.elements();
+function removeProject(strInt) {
+  if (strInt == "0") {
+    const elements = document.querySelectorAll("[data-id= '0']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "1") {
+    const elements = document.querySelectorAll("[data-id= '1']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "2") {
+    const elements = document.querySelectorAll("[data-id= '2']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "3") {
+    const elements = document.querySelectorAll("[data-id= '3']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "4") {
+    const elements = document.querySelectorAll("[data-id= '4']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "5") {
+    const elements = document.querySelectorAll("[data-id= '5']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "6") {
+    const elements = document.querySelectorAll("[data-id= '6']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "7") {
+    const elements = document.querySelectorAll("[data-id= '7']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "8") {
+    const elements = document.querySelectorAll("[data-id= '8']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "9") {
+    const elements = document.querySelectorAll("[data-id= '9']");
+    elements.forEach((element) => element.remove());
+  } else if (strInt == "10") {
+    const elements = document.querySelectorAll("[data-id= '10']");
+    elements.forEach((element) => element.remove());
   }
 }
 
 modalContainerGallery.addEventListener("click", function onClick(e) {
+  e.preventDefault();
   if (e.target.classList.contains("fa-trash-can")) {
     console.log(e.target.id);
     const workId = e.target.id;
     console.log(workId);
-    console.log(typeof workId);
-    console.log(document.querySelectorAll("[data-id = '1']"));
+
+    fetch(`http://localhost:5678/api/works/${workId}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    //on actualise les projets
+    removeProject(workId);
 
     async function deleteProjects() {
       let er = "Le projet n est pas supprimé";
@@ -330,7 +361,7 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
         });
         if (res.ok) {
           //on actualise les projets
-          removeProject();
+          removeProject(workId);
         }
       } catch (er) {
         console.error(er);
