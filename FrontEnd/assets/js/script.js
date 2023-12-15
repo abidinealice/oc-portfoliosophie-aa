@@ -373,11 +373,11 @@ modalAddBtn.addEventListener("click", function onClick(event) {
 
 function setCategoryId(str) {
   if (str == "objet") {
-    return "1";
+    return 1;
   } else if (str == "appartements") {
-    return "2";
+    return 2;
   } else if (str == "hotelsres") {
-    return "3";
+    return 3;
   }
 }
 
@@ -386,8 +386,13 @@ modalFormAdd.addEventListener("submit", function (event) {
 
   const formImg = modalAddPreview.getAttribute("src");
   const formTitle = event.target.querySelector("[name=title]").value;
-  const formCategory = event.target.querySelector("[name=category]").value;
+  const formCategory = setCategoryId(
+    event.target.querySelector("[name=category]").value
+  );
   const msgError = document.querySelector(".msg-error");
+  const msgErrorAPI = document.querySelector(".msg-error-api");
+
+  //FONCTION VERIFIE LE FORMULAIRE
 
   function validForm(form) {
     if (formImg == "" || formTitle == "" || formCategory === undefined) {
@@ -397,17 +402,52 @@ modalFormAdd.addEventListener("submit", function (event) {
     }
   }
 
-  const formData = {
-    img: formImg,
-    title: formTitle,
-    category: setCategoryId(formCategory),
-  };
+  //FONCTION AJOUT NOUVEAU ELEMENT GALLERIE MODAL
+
+  function addProjectModal(obj) {
+    let htmlFigure = document.createElement("figure");
+    htmlFigure.setAttribute("data-id", obj.get("category"));
+
+    let htmlImg = document.createElement("img");
+    htmlImg.setAttribute("src", obj.get("img"));
+    htmlImg.setAttribute("alt", obj.get("title"));
+
+    let htmlId = document.createElement("i");
+    htmlId.setAttribute("class", "fa-solid fa-trash-can");
+    htmlId.setAttribute("id", obj.get("category"));
+
+    htmlFigure.appendChild(htmlImg);
+    htmlFigure.appendChild(htmlId);
+    modalContainerGallery.appendChild(htmlFigure);
+  }
+
+  //FONCTION AJOUT NOUVEAU ELEMENT GALLERIE MES PROJETS
+
+  function addProject(obj) {
+    let htmlFigure = document.createElement("figure");
+    htmlFigure.setAttribute("data-id", obj.get("category"));
+
+    let htmlImg = document.createElement("img");
+    htmlImg.setAttribute("src", obj.get("img"));
+    htmlImg.setAttribute("alt", obj.get("title"));
+
+    let htmlFigcaption = document.createElement("figcaption");
+    let htmlNewContent = document.createTextNode(obj.get("title"));
+
+    htmlFigcaption.appendChild(htmlNewContent);
+    htmlFigure.appendChild(htmlImg);
+    htmlFigure.appendChild(htmlFigcaption);
+    modalContainerGallery.appendChild(htmlFigure);
+  }
 
   if (validForm(formData) == true) {
     //on peut envoyer le formulaire
 
-    //Creation de la charge utile au format JSON
-    const chargeUtile = JSON.stringify(formData);
+    //Creation de la charge utile au format demandé
+    var formData = new FormData();
+    formData.append("image", formImg);
+    formData.append("title", formTitle);
+    formData.append("category", formCategory);
 
     // ON ENVOIE LES DONNES
 
@@ -416,25 +456,28 @@ modalFormAdd.addEventListener("submit", function (event) {
       try {
         const response = await fetch(urlWorks, {
           method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: chargeUtile,
+          //headers: {
+          //"Content-Type": "multipart/form-data",
+          //Authorization: `Bearer ${token}`,
+          //},
+          body: formData,
         });
         if (response.ok) {
           modal.style.visibility = "hidden";
+          //fonction creant un element dans la page
+          addProject();
+          //fonction creant un element dans la modale
+          addProjectModal();
         } else {
           //on affiche le message d'erreur
-          if (msgError.hasAttributes("hidden")) {
-            msgError.removeAttribute("hidden");
+          if (msgErrorAPI.hasAttributes("hidden")) {
+            msgErrorAPI.removeAttribute("hidden");
           }
         }
       } catch (error) {
         console.error(error);
       }
     }
-    //sendForm();
+    sendForm();
   }
-
-  console.log(formData);
 });
