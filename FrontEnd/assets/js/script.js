@@ -300,15 +300,43 @@ modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
 
 const modalContainerGallery = document.querySelector(".modal-gallery");
 
+function removeProject() {
+  if (workId == "1") {
+    const elements = document.querySelectorAll("['data-id'= '1']");
+    remove.elements();
+  } else if (workId == "2") {
+    const elements = document.querySelectorAll("['data-id'= '2']");
+    remove.elements();
+  } else if (workId == "3") {
+    const elements = document.querySelectorAll("['data-id'= '3']");
+    remove.elements();
+  }
+}
+
 modalContainerGallery.addEventListener("click", function onClick(e) {
   if (e.target.classList.contains("fa-trash-can")) {
     console.log(e.target.id);
     const workId = e.target.id;
+    console.log(workId);
+    console.log(typeof workId);
+    console.log(document.querySelectorAll("[data-id = '1']"));
 
-    fetch(`http://localhost:5678/api/works/${workId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    async function deleteProjects() {
+      let er = "Le projet n est pas supprimé";
+      try {
+        const res = await fetch(`http://localhost:5678/api/works/${workId}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.ok) {
+          //on actualise les projets
+          removeProject();
+        }
+      } catch (er) {
+        console.error(er);
+      }
+    }
+    //deleteProjects();
   }
 });
 
