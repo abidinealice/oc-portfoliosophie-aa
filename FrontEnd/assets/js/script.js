@@ -340,17 +340,18 @@ function removeProject(strInt) {
 modalContainerGallery.addEventListener("click", function onClick(e) {
   e.preventDefault();
   if (e.target.classList.contains("fa-trash-can")) {
+    e.preventDefault();
     console.log(e.target.id);
     const workId = e.target.id;
     console.log(workId);
 
-    fetch(`http://localhost:5678/api/works/${workId}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    //fetch(`http://localhost:5678/api/works/${workId}`, {
+    //method: "DELETE",
+    //headers: { Authorization: `Bearer ${token}` },
+    //});
 
     //on actualise les projets
-    removeProject(workId);
+    //removeProject(workId);
 
     async function deleteProjects() {
       let er = "Le projet n est pas supprimé";
@@ -506,7 +507,7 @@ modalFormAdd.addEventListener("submit", function (event) {
     var formData = new FormData();
     formData.append("image", formImg);
     formData.append("title", formTitle);
-    formData.append("category", formCategory);
+    formData.append("category", parseInt(formCategory));
 
     // ON ENVOIE LES DONNES
 
@@ -537,6 +538,6 @@ modalFormAdd.addEventListener("submit", function (event) {
         console.error(error);
       }
     }
-    sendForm();
+    //sendForm();
   }
 });
