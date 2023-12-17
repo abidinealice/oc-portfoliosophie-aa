@@ -110,29 +110,32 @@
                 </div>
                 <p id="title-modal">Ajout photo</p>
                 <div class="modal-add">
-                  <div class="modal-add-picture">
-                    <img
-                      src="assets/icons/picturemodal.svg"
-                      alt="Image ajout image"
-                      class="modal-add-picture-img"
-                    />
-                    <button class="modal-add-picture-btn">
-                      + Ajouter photo
-                    </button>
-                    <input
-                      type="file"
-                      id="modal-add-picture-input"
-                      accept=".jpg, .png"
-                      max-file-size="4194304"
-                    />
-                    <img
-                      src=""
-                      alt="Prévisualisation de l'image"
-                      class="modal-add-picture-preview"
-                    />
-                    <p class="modal-add-picture-txt">jpg, png : 4mo max</p>
-                  </div>
                   <form class="modal-add-form">
+                    <div class="modal-add-picture">
+                      <img
+                        src="assets/icons/picturemodal.svg"
+                        alt="Image ajout image"
+                        class="modal-add-picture-img"
+                      />
+                      <label
+                        for="modal-add-picture-input"
+                        class="modal-add-picture-btn"
+                      >
+                        + Ajouter photo
+                      </label>
+                      <input
+                        type="file"
+                        id="modal-add-picture-input"
+                        accept=".jpg, .png"
+                        max-file-size="4194304"
+                      />
+                      <img
+                        src=""
+                        alt="Prévisualisation de l'image"
+                        class="modal-add-picture-preview"
+                      />
+                      <p class="modal-add-picture-txt">jpg, png : 4mo max</p>
+                    </div>
                     <label for="modal-add-title">Titre</label>
                     <input
                       type="text"

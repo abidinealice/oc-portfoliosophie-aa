@@ -5,18 +5,36 @@
 const urlWorks = "http://localhost:5678/api/works";
 const containerGallery = document.querySelector(".gallery");
 let workProjects = [];
-//const urlCategories = "http://localhost:5678/api/categories";
-//let categoriesProjects = [];
 const containerCategories = document.querySelector("#categories");
+const modalContainerGallery = document.querySelector(".modal-gallery");
 
 //AFFICHAGE DES PROJETS
 
 function displayProjects(obj) {
-  for (projects in obj) {
-    containerGallery.innerHTML += `<figure data-id="${[projects]}" >
+  for (projects = 0; projects < obj.length; projects++) {
+    containerGallery.innerHTML += `<figure data-id="${obj[projects].id}" >
   <img src="${obj[projects].imageUrl}" alt="${obj[projects].title}">
   <figcaption>${obj[projects].title}</figcaption>
 </figure>`;
+  }
+}
+
+function displayProjectsModal(obj) {
+  for (projects = 0; projects < workProjects.length; projects++) {
+    let htmlFigure = document.createElement("figure");
+    htmlFigure.setAttribute("data-id", obj[projects].id);
+
+    let htmlImg = document.createElement("img");
+    htmlImg.setAttribute("src", obj[projects].imageUrl);
+    htmlImg.setAttribute("alt", obj[projects].title);
+
+    let htmlI = document.createElement("i");
+    htmlI.setAttribute("class", "fa-solid fa-trash-can");
+    htmlI.setAttribute("id", obj[projects].id);
+
+    htmlFigure.appendChild(htmlImg);
+    htmlFigure.appendChild(htmlI);
+    modalContainerGallery.appendChild(htmlFigure);
   }
 }
 
@@ -27,42 +45,13 @@ async function getWorks() {
     const works = await response.json();
     workProjects = works;
     console.log(workProjects);
-
-    //for (projects in works) {
-    //containerGallery.innerHTML += `<figure data-id="${[projects]}" >
-    //<img src="${works[projects].imageUrl}" alt="${works[projects].title}">
-    //<figcaption>${works[projects].title}</figcaption>
-    //</figure>`;
-    //}
+    console.log(workProjects.length);
 
     displayProjects(works);
 
     //GALLERY MODAL --- AFFICHAGE
 
-    const modalContainerGallery = document.querySelector(".modal-gallery");
-
-    for (projects in workProjects) {
-      //modalContainerGallery.innerHTML += `<figure data-id="${[projects]}">
-      //<img src="${workProjects[projects].imageUrl}" alt="${
-      //workProjects[projects].title
-      //}">
-      //<i class="fa-solid fa-trash-can" id="${[projects]}"></i>
-      //</figure>`;
-      let htmlFigure = document.createElement("figure");
-      htmlFigure.setAttribute("data-id", [projects]);
-
-      let htmlImg = document.createElement("img");
-      htmlImg.setAttribute("src", workProjects[projects].imageUrl);
-      htmlImg.setAttribute("alt", workProjects[projects].title);
-
-      let htmlId = document.createElement("i");
-      htmlId.setAttribute("class", "fa-solid fa-trash-can");
-      htmlId.setAttribute("id", [projects]);
-
-      htmlFigure.appendChild(htmlImg);
-      htmlFigure.appendChild(htmlId);
-      modalContainerGallery.appendChild(htmlFigure);
-    }
+    displayProjectsModal(works);
   } catch (err) {
     console.error(err);
   }
@@ -102,19 +91,6 @@ function changeColor(btn1, btn2, btn3, btn4) {
 //AFFICHAGE DE TOUS LES PROJETS AU CLICK SUR LE BOUTON
 
 buttonTous.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
-
-  containerGallery.innerHTML = "";
-
-  //for (projects in workProjects) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${workProjects[projects].imageUrl}" alt="${workProjects[projects].title}">
-  //<figcaption>${workProjects[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(workProjects);
-
   //ON CHANGE LA COULEUR DU BOUTON
 
   let backgroundColor = buttonTous.style.backgroundColor;
@@ -122,33 +98,18 @@ buttonTous.addEventListener("click", function onClick(event) {
   if (backgroundColor === "white") {
     changeColor(buttonTous, buttonObjets, buttonAppartements, buttonHotelres);
   }
+  //ON VIDE LA GALLERIE
+
+  containerGallery.innerHTML = "";
+
+  //ON AFFICHE LES PROJETS
+  displayProjects(workProjects);
 });
 
 //AFFICHAGE DES PROJETS OBJETS AU CLICK SUR LE BOUTON
 
 buttonObjets.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
-
-  containerGallery.innerHTML = "";
-
-  //ON FILTRE LES PROJETS
-
-  let filteredObjects = workProjects.filter((objects) => {
-    return objects.categoryId == 1;
-  });
-
-  //ON AFFICHE LES PROJETS FILTRES
-
-  //for (projects in filteredObjects) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredObjects[projects].imageUrl}" alt="${filteredObjects[projects].title}">
-  //<figcaption>${filteredObjects[projects].title}</figcaption>
-  //</figure>`;
-  //}
-  displayProjects(filteredObjects);
-
   //ON CHANGE LA COULEUR DU BOUTON
-
   let backgroundColor = buttonObjets.style.backgroundColor;
 
   if (backgroundColor === "#1D6154") {
@@ -156,33 +117,23 @@ buttonObjets.addEventListener("click", function onClick(event) {
   } else {
     changeColor(buttonObjets, buttonTous, buttonAppartements, buttonHotelres);
   }
+
+  //ON VIDE LA GALLERIE
+  containerGallery.innerHTML = "";
+
+  //ON FILTRE LES PROJETS
+  let filteredObjects = workProjects.filter((objects) => {
+    return objects.categoryId == 1;
+  });
+
+  //ON AFFICHE LES PROJETS FILTRES
+  displayProjects(filteredObjects);
 });
 
 //AFFICHAGE DES PROJETS APPARTEMENTS AU CLICK SUR LE BOUTON
 
 buttonAppartements.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
-  containerGallery.innerHTML = "";
-
-  //ON FILTRE LES PROJETS
-
-  let filteredAppartments = workProjects.filter((appartments) => {
-    return appartments.categoryId == 2;
-  });
-
-  //ON AFFICHE LES PROJETS FILTRES
-
-  //for (projects in filteredAppartments) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredAppartments[projects].imageUrl}" alt="${filteredAppartments[projects].title}">
-  //<figcaption>${filteredAppartments[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(filteredAppartments);
-
   //ON CHANGE LA COULEUR DU BOUTON
-
   const backgroundColor = buttonAppartements.style.backgroundColor;
 
   if (backgroundColor === "#1D6154") {
@@ -190,33 +141,23 @@ buttonAppartements.addEventListener("click", function onClick(event) {
   } else {
     changeColor(buttonAppartements, buttonTous, buttonObjets, buttonHotelres);
   }
+
+  //ON VIDE LA GALLERIE
+  containerGallery.innerHTML = "";
+
+  //ON FILTRE LES PROJETS
+  let filteredAppartments = workProjects.filter((appartments) => {
+    return appartments.categoryId == 2;
+  });
+
+  //ON AFFICHE LES PROJETS FILTRES
+  displayProjects(filteredAppartments);
 });
 
 //AFFICHAGE DES PROJETS HOTELRES AU CLICK SUR LE BOUTON
 
 buttonHotelres.addEventListener("click", function onClick(event) {
-  //ON VIDE LA GALLERIE
-  containerGallery.innerHTML = "";
-
-  //ON FILTRE LES PROJETS
-
-  let filteredHotelres = workProjects.filter((hotelres) => {
-    return hotelres.categoryId == 3;
-  });
-
-  //ON AFFICHE LES PROJETS FILTRES
-
-  //for (projects in filteredHotelres) {
-  //containerGallery.innerHTML += `<figure>
-  //<img src="${filteredHotelres[projects].imageUrl}" alt="${filteredHotelres[projects].title}">
-  //<figcaption>${filteredHotelres[projects].title}</figcaption>
-  //</figure>`;
-  //}
-
-  displayProjects(filteredHotelres);
-
   //ON CHANGE LA COULEUR DU BOUTON
-
   const backgroundColor = buttonHotelres.style.backgroundColor;
 
   if (backgroundColor === "#1D6154") {
@@ -224,6 +165,17 @@ buttonHotelres.addEventListener("click", function onClick(event) {
   } else {
     changeColor(buttonHotelres, buttonTous, buttonObjets, buttonAppartements);
   }
+
+  //ON VIDE LA GALLERIE
+  containerGallery.innerHTML = "";
+
+  //ON FILTRE LES PROJETS
+  let filteredHotelres = workProjects.filter((hotelres) => {
+    return hotelres.categoryId == 3;
+  });
+
+  //ON AFFICHE LES PROJETS FILTRES
+  displayProjects(filteredHotelres);
 });
 
 //-------------------------------------------------------//
@@ -296,79 +248,59 @@ modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
   modal.style.visibility = "hidden";
 });
 
-//GALLERY MODAL --- SUPPRIMER PROJET
-
-const modalContainerGallery = document.querySelector(".modal-gallery");
-
-function removeProject(strInt) {
-  if (strInt == "0") {
-    const elements = document.querySelectorAll("[data-id= '0']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "1") {
-    const elements = document.querySelectorAll("[data-id= '1']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "2") {
-    const elements = document.querySelectorAll("[data-id= '2']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "3") {
-    const elements = document.querySelectorAll("[data-id= '3']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "4") {
-    const elements = document.querySelectorAll("[data-id= '4']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "5") {
-    const elements = document.querySelectorAll("[data-id= '5']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "6") {
-    const elements = document.querySelectorAll("[data-id= '6']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "7") {
-    const elements = document.querySelectorAll("[data-id= '7']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "8") {
-    const elements = document.querySelectorAll("[data-id= '8']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "9") {
-    const elements = document.querySelectorAll("[data-id= '9']");
-    elements.forEach((element) => element.remove());
-  } else if (strInt == "10") {
-    const elements = document.querySelectorAll("[data-id= '10']");
-    elements.forEach((element) => element.remove());
-  }
+function updateGalleryAndModal() {
+  containerGallery.innerHTML = "";
+  modalContainerGallery.innerHTML = "";
+  getWorks();
 }
 
+function addToGalleryAndModal() {
+  async function getNewWork() {
+    let error = "La connexion au serveur a échoué";
+    try {
+      const response = await fetch(urlWorks);
+      const works = await response.json();
+      let newProject = [works.pop()];
+
+      //GALLERY --- AFFICHAGE
+      displayProjects(newProject);
+
+      //GALLERY MODAL --- AFFICHAGE
+      displayProjectsModal(newProject);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  getNewWork();
+}
+
+//GALLERY MODAL --- SUPPRIMER PROJET
+
 modalContainerGallery.addEventListener("click", function onClick(e) {
-  e.preventDefault();
   if (e.target.classList.contains("fa-trash-can")) {
-    e.preventDefault();
     console.log(e.target.id);
     const workId = e.target.id;
     console.log(workId);
 
-    //fetch(`http://localhost:5678/api/works/${workId}`, {
-    //method: "DELETE",
-    //headers: { Authorization: `Bearer ${token}` },
-    //});
-
-    //on actualise les projets
-    //removeProject(workId);
-
     async function deleteProjects() {
-      let er = "Le projet n est pas supprimé";
+      let error = "Le projet n est pas supprimé";
+      let connected = "Le projet a bien été supprimé";
       try {
         const res = await fetch(`http://localhost:5678/api/works/${workId}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
-          //on actualise les projets
-          removeProject(workId);
+          alert(connected);
+          updateGalleryAndModal();
+        } else {
+          console.error("Erreur lors de la suppression de l'élement");
         }
-      } catch (er) {
-        console.error(er);
+      } catch (error) {
+        console.error(error);
       }
     }
-    //deleteProjects();
+    deleteProjects();
   }
 });
 
@@ -402,6 +334,7 @@ const modalAddBtn = document.querySelector(".modal-add-picture-btn");
 const modalAddBtnInput = document.querySelector("#modal-add-picture-input");
 const modalAddPreview = document.querySelector(".modal-add-picture-preview");
 const modalAddTxt = document.querySelector(".modal-add-picture-txt");
+const modalAddBtnSubmit = document.querySelector(".modal-add-btn");
 
 function previewFile() {
   const file = modalAddBtnInput.files[0];
@@ -422,7 +355,6 @@ modalAddBtnInput.addEventListener("change", (event) => {
 });
 
 modalAddBtn.addEventListener("click", function onClick(event) {
-  modalAddBtnInput.click();
   modalAddImg.style.display = "none";
   modalAddBtn.style.display = "none";
   modalAddTxt.style.display = "none";
@@ -433,21 +365,22 @@ modalAddBtn.addEventListener("click", function onClick(event) {
 
 function setCategoryId(str) {
   if (str == "objet") {
-    return 1;
+    return "1";
   } else if (str == "appartements") {
-    return 2;
+    return "2";
   } else if (str == "hotelsres") {
-    return 3;
+    return "3";
   }
 }
 
-modalFormAdd.addEventListener("submit", function (event) {
-  event.preventDefault();
+modalFormAdd.addEventListener("submit", function (evt) {
+  evt.preventDefault();
 
-  const formImg = modalAddPreview.getAttribute("src");
-  const formTitle = event.target.querySelector("[name=title]").value;
+  //const formImgSrc = modalAddPreview.getAttribute("src");
+  const formImg = modalAddBtnInput.files[0];
+  const formTitle = evt.target.querySelector("[name=title]").value;
   const formCategory = setCategoryId(
-    event.target.querySelector("[name=category]").value
+    evt.target.querySelector("[name=category]").value
   );
   const msgError = document.querySelector(".msg-error");
   const msgErrorAPI = document.querySelector(".msg-error-api");
@@ -458,52 +391,24 @@ modalFormAdd.addEventListener("submit", function (event) {
     if (formImg == "" || formTitle == "" || formCategory === undefined) {
       msgError.removeAttribute("hidden");
     } else {
+      modalAddBtnSubmit.style.backgroundColor = "#1D6154";
       return true;
     }
   }
 
-  //FONCTION AJOUT NOUVEAU ELEMENT GALLERIE MODAL
+  // FONCTION RESET FORM
 
-  function addProjectModal(obj) {
-    let htmlFigure = document.createElement("figure");
-    htmlFigure.setAttribute("data-id", obj.get("category"));
-
-    let htmlImg = document.createElement("img");
-    htmlImg.setAttribute("src", obj.get("img"));
-    htmlImg.setAttribute("alt", obj.get("title"));
-
-    let htmlId = document.createElement("i");
-    htmlId.setAttribute("class", "fa-solid fa-trash-can");
-    htmlId.setAttribute("id", obj.get("category"));
-
-    htmlFigure.appendChild(htmlImg);
-    htmlFigure.appendChild(htmlId);
-    modalContainerGallery.appendChild(htmlFigure);
-  }
-
-  //FONCTION AJOUT NOUVEAU ELEMENT GALLERIE MES PROJETS
-
-  function addProject(obj) {
-    let htmlFigure = document.createElement("figure");
-    htmlFigure.setAttribute("data-id", obj.get("category"));
-
-    let htmlImg = document.createElement("img");
-    htmlImg.setAttribute("src", obj.get("img"));
-    htmlImg.setAttribute("alt", obj.get("title"));
-
-    let htmlFigcaption = document.createElement("figcaption");
-    let htmlNewContent = document.createTextNode(obj.get("title"));
-
-    htmlFigcaption.appendChild(htmlNewContent);
-    htmlFigure.appendChild(htmlImg);
-    htmlFigure.appendChild(htmlFigcaption);
-    modalContainerGallery.appendChild(htmlFigure);
+  function resetForm() {
+    modalFormAdd.reset();
+    modalAddImg.style.display = "block";
+    modalAddBtn.style.display = "block";
+    modalAddTxt.style.display = "block";
+    modalContainerAddPicture.style.padding = "20px 20px 10px 20px";
+    modalAddPreview.style.display = "none";
   }
 
   if (validForm(formData) == true) {
-    //on peut envoyer le formulaire
-
-    //Creation de la charge utile au format demandé
+    //Creation du FormData
     var formData = new FormData();
     formData.append("image", formImg);
     formData.append("title", formTitle);
@@ -512,22 +417,21 @@ modalFormAdd.addEventListener("submit", function (event) {
     // ON ENVOIE LES DONNES
 
     async function sendForm() {
+      let connected = "Le formulaire a bien été envoyé";
       let error = "La connexion au serveur a échoué";
       try {
         const response = await fetch(urlWorks, {
           method: "POST",
-          //headers: {
-          //"Content-Type": "multipart/form-data",
-          //Authorization: `Bearer ${token}`,
-          //},
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           body: formData,
         });
         if (response.ok) {
+          alert(connected);
+          resetForm();
           modal.style.visibility = "hidden";
-          //fonction creant un element dans la page
-          addProject();
-          //fonction creant un element dans la modale
-          addProjectModal();
+          updateGalleryAndModal();
         } else {
           //on affiche le message d'erreur
           if (msgErrorAPI.hasAttributes("hidden")) {
@@ -538,6 +442,6 @@ modalFormAdd.addEventListener("submit", function (event) {
         console.error(error);
       }
     }
-    //sendForm();
+    sendForm();
   }
 });

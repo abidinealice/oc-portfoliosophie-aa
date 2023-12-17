@@ -473,7 +473,7 @@ footer nav ul {
 
 .modal-add-picture .modal-add-picture-btn {
   width: 173px;
-  height: 36px;
+  padding: 12px;
   margin: 0 auto 7px auto;
   border-radius: 50px;
   border: none;
@@ -523,11 +523,11 @@ footer nav ul {
 
 .modal-add-form .modal-add-btn {
   width: 237px;
-  border: solid 1px #1d6154;
+  border: solid 1px;
   border-radius: 30px;
   padding: 12px 40px;
   color: #ffffff;
-  background-color: #1d6154;
+  background-color: #a7a7a7;
   font-family: "Syne";
   margin-bottom: 2.5em;
   margin-top: 0;
