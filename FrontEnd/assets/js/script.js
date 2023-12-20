@@ -254,26 +254,6 @@ function updateGalleryAndModal() {
   getWorks();
 }
 
-function addToGalleryAndModal() {
-  async function getNewWork() {
-    let error = "La connexion au serveur a échoué";
-    try {
-      const response = await fetch(urlWorks);
-      const works = await response.json();
-      let newProject = [works.pop()];
-
-      //GALLERY --- AFFICHAGE
-      displayProjects(newProject);
-
-      //GALLERY MODAL --- AFFICHAGE
-      displayProjectsModal(newProject);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  getNewWork();
-}
-
 //GALLERY MODAL --- SUPPRIMER PROJET
 
 modalContainerGallery.addEventListener("click", function onClick(e) {
@@ -291,8 +271,8 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
-          alert(connected);
           updateGalleryAndModal();
+          alert(connected);
         } else {
           console.error("Erreur lors de la suppression de l'élement");
         }
@@ -388,7 +368,7 @@ modalFormAdd.addEventListener("submit", function (evt) {
   //FONCTION VERIFIE LE FORMULAIRE
 
   function validForm(form) {
-    if (formImg == "" || formTitle == "" || formCategory === undefined) {
+    if (!formImg || !formTitle || !formCategory) {
       msgError.removeAttribute("hidden");
     } else {
       modalAddBtnSubmit.style.backgroundColor = "#1D6154";
@@ -428,10 +408,10 @@ modalFormAdd.addEventListener("submit", function (evt) {
           body: formData,
         });
         if (response.ok) {
-          alert(connected);
           resetForm();
           modal.style.visibility = "hidden";
           updateGalleryAndModal();
+          alert(connected);
         } else {
           //on affiche le message d'erreur
           if (msgErrorAPI.hasAttributes("hidden")) {
