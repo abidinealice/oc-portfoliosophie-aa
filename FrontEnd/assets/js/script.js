@@ -1,4 +1,30 @@
 //-------------------------------------------------------//
+//-------- PARTIE L'UTILISATEUR N'EST PAS CONNECTE
+//-------------------------------------------------------//
+
+//Si l'utilisateur n'est pas connecté:
+// - le mode édition est caché
+
+//window.sessionStorage.setItem("valueToken", utilToken);
+let token = window.sessionStorage.getItem("valueToken");
+console.log(token);
+
+const editingMode = document.querySelector(".editing-mode");
+const procjectSection = document.querySelector(".section-project");
+const modif = document.querySelector(".modif");
+const modal = document.querySelector("#modal1");
+
+function hideModal() {
+  modal.style.visibility = "hidden";
+}
+
+if (token == null) {
+  editingMode.remove();
+  modif.remove();
+  hideModal();
+}
+
+//-------------------------------------------------------//
 //-------- PARTIE MES PROJETS
 //-------------------------------------------------------//
 
@@ -182,58 +208,35 @@ buttonHotelres.addEventListener("click", function onClick(event) {
 //-------- PARTIE L'UTILISATEUR EST CONNECTE
 //-------------------------------------------------------//
 
-//LOG OUT
-//window.sessionStorage.setItem("valueToken", utilToken);
-let token = window.sessionStorage.getItem("valueToken");
-console.log(token);
-
 const logout = document.querySelector(".lien-logout");
 const login = document.querySelector(".lien-login");
+const btnModalShow = document.querySelector(".btn-modal-show");
+const modalWrapper = document.querySelector(".modal-wrapper");
 
+function showModal() {
+  modal.style.visibility = "visible";
+}
+
+//LOG IN
+if (token !== null && logout.hasAttribute("hidden")) {
+  logout.removeAttribute("hidden");
+  login.setAttribute("hidden", "");
+  hideModal();
+  containerCategories.style.display = "none";
+  procjectSection.style.marginBottom = "70px";
+}
+
+//LOG OUT
 //On vide le session storage, token supprimé
-
 logout.addEventListener("click", function onClick(event) {
   sessionStorage.removeItem("valueToken");
 });
 
-//HIDE OR SHOW MODE EDITION
-
-const editingMode = document.querySelector(".editing-mode");
-const procjectSection = document.querySelector(".section-project");
-const editing = document.querySelector(".editing");
-const modal = document.querySelector("#modal1");
-
-//Si l'utilisateur n'est pas connecté:
-// - on cache le mode édition
-
-if (token == null) {
-  editingMode.remove();
-  editing.remove();
-  modal.style.visibility = "hidden";
-}
-
-//HIDE LOGIN SHOW LOGOUT
-//Si l'utilisateur est connecté :
-// - on affiche le mode édition
-// - on cache le login
-// - on active le logout
-// - on cache les boutons catégories
-
-if (token !== null && logout.hasAttribute("hidden")) {
-  logout.removeAttribute("hidden");
-  login.setAttribute("hidden", "");
-  modal.style.visibility = "hidden";
-  containerCategories.style.display = "none";
-  procjectSection.style.marginBottom = "70px";
-
-  //SHOW MODAL
-  //lorsqu'on clique sur "modifier", le modal s'active/s'ouvre
-  const btnModalShow = document.querySelector(".btn-modal-show");
-
-  btnModalShow.addEventListener("click", function onClick(event) {
-    modal.style.visibility = "visible";
-  });
-}
+//SHOW MODAL
+btnModalShow.addEventListener("click", function onClick(event) {
+  showModal();
+  modalWrapper.removeAttribute("hidden");
+});
 
 //HIDE MODAL
 //lorsqu'on clique sur icon x, le modal se désactive/se ferme
@@ -242,19 +245,19 @@ const modalBtnXMark = document.querySelector(".btn-modal-xmark");
 const modalBtnXMarkAdd = document.querySelector(".btn-modal-xmark-add");
 
 modalBtnXMark.addEventListener("click", function onClick(event) {
-  modal.style.visibility = "hidden";
+  hideModal();
 });
 modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
-  modal.style.visibility = "hidden";
+  hideModal();
 });
+
+//GALLERY MODAL --- SUPPRIMER PROJET
 
 function updateGalleryAndModal() {
   containerGallery.innerHTML = "";
   modalContainerGallery.innerHTML = "";
   getWorks();
 }
-
-//GALLERY MODAL --- SUPPRIMER PROJET
 
 modalContainerGallery.addEventListener("click", function onClick(e) {
   if (e.target.classList.contains("fa-trash-can")) {
@@ -272,7 +275,6 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
         });
         if (res.ok) {
           updateGalleryAndModal();
-          alert(connected);
         } else {
           console.error("Erreur lors de la suppression de l'élement");
         }
@@ -292,16 +294,24 @@ const modalAdd = document.querySelector(".modal-wrapper-add");
 const modalBtnArrowLeft = document.querySelector(".btn-modal-arrowleft");
 const modalFormAdd = document.querySelector(".modal-add-form");
 
-modalBtnAdd.addEventListener("click", function onClick(ev) {
+function hideModalGallery() {
   modalGallery.style.display = "none";
   modalAdd.removeAttribute("hidden");
   modalAdd.style.display = "";
-});
+}
 
-modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
+function showModalGallery() {
   modalGallery.style.display = "";
   modalAdd.style.display = "none";
   modalAdd.setAttribute("hidden", "");
+}
+
+modalBtnAdd.addEventListener("click", function onClick(ev) {
+  hideModalGallery();
+});
+
+modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
+  showModalGallery();
 });
 
 //AJOUT PHOTO
@@ -332,13 +342,10 @@ function previewFile() {
 
 modalAddBtnInput.addEventListener("change", (event) => {
   previewFile();
-});
-
-modalAddBtn.addEventListener("click", function onClick(event) {
   modalAddImg.style.display = "none";
-  modalAddBtn.style.display = "none";
   modalAddTxt.style.display = "none";
   modalContainerAddPicture.style.padding = "0";
+  modalAddBtn.style.display = "none";
 });
 
 // ENVOIE DU FORMULAIRE
@@ -409,7 +416,8 @@ modalFormAdd.addEventListener("submit", function (evt) {
         });
         if (response.ok) {
           resetForm();
-          modal.style.visibility = "hidden";
+          hideModal();
+          showModalGallery();
           updateGalleryAndModal();
           alert(connected);
         } else {

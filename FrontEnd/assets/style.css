@@ -341,16 +341,16 @@ footer nav ul {
   gap: 20px;
 }
 
-.editing {
+.modif {
   display: flex;
   gap: 10px;
 }
 
-.editing p {
+.modif p {
   text-align: center;
 }
 
-.editing a {
+.modif a {
   text-decoration: none;
   color: black;
 }
