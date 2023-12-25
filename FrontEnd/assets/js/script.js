@@ -5,7 +5,6 @@
 //Si l'utilisateur n'est pas connecté:
 // - le mode édition est caché
 
-//window.sessionStorage.setItem("valueToken", utilToken);
 let token = window.sessionStorage.getItem("valueToken");
 console.log(token);
 
@@ -34,8 +33,7 @@ let workProjects = [];
 const containerCategories = document.querySelector("#categories");
 const modalContainerGallery = document.querySelector(".modal-gallery");
 
-//AFFICHAGE DES PROJETS
-
+//FONCTION AFFICHAGE DES PROJETS DANS LA GALLERIE
 function displayProjects(obj) {
   for (projects = 0; projects < obj.length; projects++) {
     containerGallery.innerHTML += `<figure data-id="${obj[projects].id}" >
@@ -44,7 +42,7 @@ function displayProjects(obj) {
 </figure>`;
   }
 }
-
+//FONCTION AFFICHAGE DES PROJETS DANS LA MODALE
 function displayProjectsModal(obj) {
   for (projects = 0; projects < workProjects.length; projects++) {
     let htmlFigure = document.createElement("figure");
@@ -71,12 +69,11 @@ async function getWorks() {
     const works = await response.json();
     workProjects = works;
     console.log(workProjects);
-    console.log(workProjects.length);
 
+    //GALLERY --- AFFICHAGE
     displayProjects(works);
 
     //GALLERY MODAL --- AFFICHAGE
-
     displayProjectsModal(works);
   } catch (err) {
     console.error(err);
@@ -114,93 +111,92 @@ function changeColor(btn1, btn2, btn3, btn4) {
   changeColorBtnOff(btn4);
 }
 
-//AFFICHAGE DE TOUS LES PROJETS AU CLICK SUR LE BOUTON
+// --- AFFICHAGE DE TOUS LES PROJETS AU CLICK SUR LE BOUTON
 
 buttonTous.addEventListener("click", function onClick(event) {
-  //ON CHANGE LA COULEUR DU BOUTON
-
   let backgroundColor = buttonTous.style.backgroundColor;
 
+  //On change la couleur des boutons au click sur celui-ci
   if (backgroundColor === "white") {
     changeColor(buttonTous, buttonObjets, buttonAppartements, buttonHotelres);
   }
-  //ON VIDE LA GALLERIE
 
+  //On vide la gallerie
   containerGallery.innerHTML = "";
 
-  //ON AFFICHE LES PROJETS
+  //On affiche les projets
   displayProjects(workProjects);
 });
 
-//AFFICHAGE DES PROJETS OBJETS AU CLICK SUR LE BOUTON
+// --- AFFICHAGE DES PROJETS OBJETS AU CLICK SUR LE BOUTON
 
 buttonObjets.addEventListener("click", function onClick(event) {
-  //ON CHANGE LA COULEUR DU BOUTON
   let backgroundColor = buttonObjets.style.backgroundColor;
 
+  //On change la couleur des boutons au click sur celui-ci
   if (backgroundColor === "#1D6154") {
     buttonObjets.style.backgroundColor = "white";
   } else {
     changeColor(buttonObjets, buttonTous, buttonAppartements, buttonHotelres);
   }
 
-  //ON VIDE LA GALLERIE
+  //On vide la gallerie
   containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+  //On filtre les projets
   let filteredObjects = workProjects.filter((objects) => {
     return objects.categoryId == 1;
   });
 
-  //ON AFFICHE LES PROJETS FILTRES
+  //On affiche les projets filtrés
   displayProjects(filteredObjects);
 });
 
-//AFFICHAGE DES PROJETS APPARTEMENTS AU CLICK SUR LE BOUTON
+// --- AFFICHAGE DES PROJETS APPARTEMENTS AU CLICK SUR LE BOUTON
 
 buttonAppartements.addEventListener("click", function onClick(event) {
-  //ON CHANGE LA COULEUR DU BOUTON
   const backgroundColor = buttonAppartements.style.backgroundColor;
 
+  //On change la couleur des boutons au click sur celui-ci
   if (backgroundColor === "#1D6154") {
     buttonAppartements.style.backgroundColor = "white";
   } else {
     changeColor(buttonAppartements, buttonTous, buttonObjets, buttonHotelres);
   }
 
-  //ON VIDE LA GALLERIE
+  //On vide la gallerie
   containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+  //On filtre les projets
   let filteredAppartments = workProjects.filter((appartments) => {
     return appartments.categoryId == 2;
   });
 
-  //ON AFFICHE LES PROJETS FILTRES
+  //On affiche les projets filtrés
   displayProjects(filteredAppartments);
 });
 
-//AFFICHAGE DES PROJETS HOTELRES AU CLICK SUR LE BOUTON
+// --- AFFICHAGE DES PROJETS HOTELRES AU CLICK SUR LE BOUTON
 
 buttonHotelres.addEventListener("click", function onClick(event) {
-  //ON CHANGE LA COULEUR DU BOUTON
   const backgroundColor = buttonHotelres.style.backgroundColor;
 
+  //On change la couleur des boutons au click sur celui-ci
   if (backgroundColor === "#1D6154") {
     buttonHotelres.style.backgroundColor = "white";
   } else {
     changeColor(buttonHotelres, buttonTous, buttonObjets, buttonAppartements);
   }
 
-  //ON VIDE LA GALLERIE
+  //On vide la gallerie
   containerGallery.innerHTML = "";
 
-  //ON FILTRE LES PROJETS
+  //On filtre les projets
   let filteredHotelres = workProjects.filter((hotelres) => {
     return hotelres.categoryId == 3;
   });
 
-  //ON AFFICHE LES PROJETS FILTRES
+  //On affiche les projets filtrés
   displayProjects(filteredHotelres);
 });
 
@@ -217,7 +213,7 @@ function showModal() {
   modal.style.visibility = "visible";
 }
 
-//LOG IN
+// --- LOG IN
 if (token !== null && logout.hasAttribute("hidden")) {
   logout.removeAttribute("hidden");
   login.setAttribute("hidden", "");
@@ -226,21 +222,20 @@ if (token !== null && logout.hasAttribute("hidden")) {
   procjectSection.style.marginBottom = "70px";
 }
 
-//LOG OUT
+// --- LOG OUT
 //On vide le session storage, token supprimé
 logout.addEventListener("click", function onClick(event) {
   sessionStorage.removeItem("valueToken");
 });
 
-//SHOW MODAL
+// --- SHOW MODAL
 btnModalShow.addEventListener("click", function onClick(event) {
   showModal();
   modalWrapper.removeAttribute("hidden");
 });
 
-//HIDE MODAL
-//lorsqu'on clique sur icon x, le modal se désactive/se ferme
-
+// --- HIDE MODAL
+//lorsqu'on clique sur icon x, la modale se désactive/se ferme
 const modalBtnXMark = document.querySelector(".btn-modal-xmark");
 const modalBtnXMarkAdd = document.querySelector(".btn-modal-xmark-add");
 
@@ -251,7 +246,9 @@ modalBtnXMarkAdd.addEventListener("click", function onClick(event) {
   hideModal();
 });
 
-//GALLERY MODAL --- SUPPRIMER PROJET
+// --------------------------------
+// --- GALLERY MODAL --- SUPPRIMER PROJET
+// --------------------------------
 
 function updateGalleryAndModal() {
   containerGallery.innerHTML = "";
@@ -286,7 +283,9 @@ modalContainerGallery.addEventListener("click", function onClick(e) {
   }
 });
 
-//ADD MODAL --- AJOUTER PROJET
+// --------------------------------
+// --- ADD MODAL --- AJOUTER PROJET
+// --------------------------------
 
 const modalBtnAdd = document.querySelector(".btn-modal-ajout");
 const modalGallery = document.querySelector(".modal-wrapper-gallery");
@@ -306,6 +305,7 @@ function showModalGallery() {
   modalAdd.setAttribute("hidden", "");
 }
 
+// --- ADD MODAL --- AFFICHAGE
 modalBtnAdd.addEventListener("click", function onClick(ev) {
   hideModalGallery();
 });
@@ -314,9 +314,7 @@ modalBtnArrowLeft.addEventListener("click", function onClick(ev) {
   showModalGallery();
 });
 
-//AJOUT PHOTO
-
-//IMPORTATION IMAGE
+// --- IMPORTATION IMAGE
 
 const modalContainerAddPicture = document.querySelector(".modal-add-picture");
 const modalAddImg = document.querySelector(".modal-add-picture-img");
@@ -331,7 +329,7 @@ function previewFile() {
   const reader = new FileReader();
 
   reader.addEventListener("load", (event) => {
-    // on convertit l'image en une chaîne de caractères base64
+    //On convertit l'image en une chaîne de caractères base64
     modalAddPreview.src = reader.result;
     modalAddPreview.style.display = "block";
   });
@@ -340,6 +338,7 @@ function previewFile() {
   }
 }
 
+//Lorsqu'on clique sur le bouton, une fenêtre s'ouvre, on choisis notre image à importer
 modalAddBtnInput.addEventListener("change", (event) => {
   previewFile();
   modalAddImg.style.display = "none";
@@ -348,8 +347,9 @@ modalAddBtnInput.addEventListener("change", (event) => {
   modalAddBtn.style.display = "none";
 });
 
-// ENVOIE DU FORMULAIRE
+// --- ENVOIE DU FORMULAIRE
 
+//FONCTION ATTRIBUANT UN ID
 function setCategoryId(str) {
   if (str == "objet") {
     return "1";
@@ -372,8 +372,7 @@ modalFormAdd.addEventListener("submit", function (evt) {
   const msgError = document.querySelector(".msg-error");
   const msgErrorAPI = document.querySelector(".msg-error-api");
 
-  //FONCTION VERIFIE LE FORMULAIRE
-
+  //FONCTION VALIDATION DU FORMULAIRE
   function validForm(form) {
     if (!formImg || !formTitle || !formCategory) {
       msgError.removeAttribute("hidden");
@@ -384,7 +383,6 @@ modalFormAdd.addEventListener("submit", function (evt) {
   }
 
   // FONCTION RESET FORM
-
   function resetForm() {
     modalFormAdd.reset();
     modalAddImg.style.display = "block";
@@ -401,8 +399,7 @@ modalFormAdd.addEventListener("submit", function (evt) {
     formData.append("title", formTitle);
     formData.append("category", parseInt(formCategory));
 
-    // ON ENVOIE LES DONNES
-
+    //On envoie les donnes
     async function sendForm() {
       let connected = "Le formulaire a bien été envoyé";
       let error = "La connexion au serveur a échoué";
@@ -421,7 +418,6 @@ modalFormAdd.addEventListener("submit", function (evt) {
           updateGalleryAndModal();
           alert(connected);
         } else {
-          //on affiche le message d'erreur
           if (msgErrorAPI.hasAttributes("hidden")) {
             msgErrorAPI.removeAttribute("hidden");
           }
