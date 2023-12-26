@@ -363,7 +363,6 @@ function setCategoryId(str) {
 modalFormAdd.addEventListener("submit", function (evt) {
   evt.preventDefault();
 
-  //const formImgSrc = modalAddPreview.getAttribute("src");
   const formImg = modalAddBtnInput.files[0];
   const formTitle = evt.target.querySelector("[name=title]").value;
   const formCategory = setCategoryId(
