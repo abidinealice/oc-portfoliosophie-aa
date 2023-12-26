@@ -2,7 +2,6 @@ const urlLogin = "http://localhost:5678/api/users/login";
 const formLogin = document.querySelector(".form-login");
 
 const msgError = document.querySelector(".msg-error");
-let letoken = [];
 
 formLogin.addEventListener("submit", function (event) {
   event.preventDefault();
